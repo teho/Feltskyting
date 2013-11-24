@@ -733,31 +733,31 @@ a.ui-link-inherit {
 	height: 100%;
 }
 .ui-overlay-shadow {
-	-xmoz-box-shadow: 0 0 12px 			rgba(0,0,0,.6);
-	-wxebkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
-	boxx-shadow: 0 0 12px 				rgba(0,0,0,.6);
+	-moz-box-shadow: 0 0 12px 			rgba(0,0,0,.6);
+	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
+	box-shadow: 0 0 12px 				rgba(0,0,0,.6);
 }
 .ui-shadow {
-	-mxoz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	-wexbkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	bxox-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/
+	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/
 }
 .ui-bar-a .ui-shadow,
 .ui-bar-b .ui-shadow ,
 .ui-bar-c .ui-shadow  {
-	-moxz-box-shadow: 0 1px 0 				rgba(255,255,255,.3);
-	-webxkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3);
-	box-sxhadow: 0 1px 0 					rgba(255,255,255,.3);
+	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3);
+	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3);
+	box-shadow: 0 1px 0 					rgba(255,255,255,.3);
 }
 .ui-shadow-inset {
-	-moz-bxox-shadow: inset 0 1px 4px 		rgba(0,0,0,.2);
-	-webkitx-box-shadow: inset 0 1px 4px 	rgba(0,0,0,.2);
-	box-shadxow: inset 0 1px 4px 			rgba(0,0,0,.2);
+	-moz-box-shadow: inset 0 1px 4px 		rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0 1px 4px 	rgba(0,0,0,.2);
+	box-shadow: inset 0 1px 4px 			rgba(0,0,0,.2);
 }
 .ui-icon-shadow {
-	-moz-box-xshadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
-	-webkit-boxx-shadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
-	box-xshadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	box-shadow: 0 1px 0 rgba(255,255,255,.4) /*{global-icon-shadow}*/;
 }
 /* Focus state - set here for specificity (note: these classes are added by JavaScript)
 -----------------------------------------------------------------------------------------------------------*/
@@ -769,22 +769,22 @@ a.ui-link-inherit {
 }
 .ui-focus,
 .ui-btn:focus {
-	-moz-xbox-shadow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
-	-webkixt-box-shadow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
-	box-shaxdow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
+	-moz-box-shadow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
+	-webkit-box-shadow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
+	box-shadow: inset 0 0 3px #7e0408 /*{global-active-background-color}*/, 0 0 9px #7e0408 /*{global-active-background-color}*/;
 }
 .ui-input-text.ui-focus,
 .ui-input-search.ui-focus {
-	-moz-boxx-shadow: 0 0 12px #7e0408 /*{global-active-background-color}*/;
-	-webkit-bxox-shadow: 0 0 12px #7e0408 /*{global-active-background-color}*/;
-	box-shadowx: 0 0 12px #7e0408 /*{global-active-background-color}*/;	
+	-moz-box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;
+	-webkit-box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;
+	box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;	
 }
 /* unset box shadow in browsers that don't do it right
 -----------------------------------------------------------------------------------------------------------*/
 .ui-mobile-nosupport-boxshadow * {
-	-moz-box-sxhadow: none !important;
-	-webkit-boxx-shadow: none !important;
-	box-shaxdow: none !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
 }
 /* ...and bring back focus */
 .ui-mobile-nosupport-boxshadow .ui-focus,

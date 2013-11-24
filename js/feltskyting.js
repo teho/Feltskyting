@@ -25,7 +25,7 @@ function onDeviceReady() {
 	} catch (err) {
 		alert(err);
 	}
-	// initierDatabase();					// Fjernes senere og settes kun ved brukervalg
+	initierDatabase();					// Fjernes senere og settes kun ved brukervalg
 	// initierSikter();
 	initierKuler();
 }
@@ -78,13 +78,14 @@ function initierKuler() {
 // Populate the database
 // 	********************************************
 function initierDatabase() {
-	initierTabellSikter();
+	initierTabellSikte();
+	initierTabellKule();
 }
 
 //  ********************************************
 //  Sikter
 //  ********************************************
-function initierTabellSikter(tx) {
+function initierTabellSikte(tx) {
 	tx.executeSql('DROP TABLE IF EXISTS SIKTE');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS SIKTE (id unique, navn, gjenge, antKnepp)');
 	tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (1, "Busk Standard", 1.0, 12)');
