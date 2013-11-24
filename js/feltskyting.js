@@ -51,10 +51,8 @@ function initierSikter() {
 		$("#selectSikte").append($("<option />").val(val).text(text));
 	});
 
-	var sel = document.getElementById("selectSikte");
-	sel.selectedIndex = 0;
-	// Need to refresh to show the data correct
-	$('#selectSikte').selectmenu('refresh');
+	// Velg første element og refresh skjermbilde
+	$('#selectSikte').prop('selectedIndex', 0).selectmenu('refresh');
 }
 
 //
@@ -71,9 +69,9 @@ function initierKuler() {
 	$.each(results, function(val, text) {
 		$("#selectKule").append($("<option />").val(val).text(text));
 	});
-	var sel = document.getElementById("selectKule");
-	sel.selectedIndex = 2;
-	$("#selectKule").selectmenu('refresh');
+
+	// Sett valgt element og oppdater skjerm
+	$("#selectKule").prop('selectedIndex', 2).selectmenu('refresh');
 }
 
 //  ********************************************
@@ -91,6 +89,18 @@ function initierTabellSikter(tx) {
 	tx.executeSql('CREATE TABLE IF NOT EXISTS SIKTE (id unique, navn, gjenge, antKnepp)');
 	tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (1, "Busk Standard", 1.0, 12)');
 	tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (2, "Busk Finknepp", 1.0, 24)');
+}
+
+//  ********************************************
+//  Kuler
+//  ********************************************
+function initierTabellKuler(tx) {
+	tx.executeSql('DROP TABLE IF EXISTS Kule');
+	tx.executeSql('CREATE TABLE IF NOT EXISTS KULE (id unique, navn, bcoeff)');
+	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Lapua 108gr 6.5mm", .60)');
+	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 109gr 6.5mm", .61)');
+	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 123gr 6.5mm", .62)');
+	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 144gr 6.5mm", .63)');
 }
 
 //
