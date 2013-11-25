@@ -1,23 +1,22 @@
 //
-// Feltskyting
+// Feltskyting - Javascript rutiner
 //
-// Javascript rutiner
-//
-
 // **************************
 // Globale variable
 // **************************
 var db;
 // Database
 
-//
+console.log("\n************** Starting application **************");
+
+//  ********************************************
 // Wait for device API libraries to load
-//
+// 	********************************************
 document.addEventListener("deviceready", onDeviceReady, false);
 
-//
-// device APIs are available
-//
+//  ********************************************
+// onDeviceReady - Device is ready for use
+// 	********************************************
 function onDeviceReady() {
 	console.log("onDevice called");
 	try {
@@ -25,100 +24,94 @@ function onDeviceReady() {
 	} catch (err) {
 		alert(err);
 	}
-	initierDatabase();					// Fjernes senere og settes kun ved brukervalg
-	// initierSikter();
-	initierKuler();
+	// Skal fjernes senere. Skal være brukerstyrt
+	db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
 }
 
-//
-// Våpen ble endret
-//
+//  ********************************************
+//  Parameter Endret
+// 	********************************************
 function parameterEndring(obj) {
-	console.log("obj : " + obj);
-	console.log(obj.options[obj.selectedIndex].value);
-	console.log(obj.options[obj.selectedIndex].innerHTML);
+	console.log("parameterEndring");
+	// console.log(obj.options[obj.selectedIndex].value);
+	// console.log(obj.options[obj.selectedIndex].innerHTML);
 }
 
-//
-// Fyll select "sikter" med data
-//
-function initierSikter() {
-	var results = {
-		'sikte1' : 'Busk Standard',
-		'sikte2' : 'Busk Finknepp'
-	};
-	$.each(results, function(val, text) {
-		$("#selectSikte").append($("<option />").val(val).text(text));
-	});
-
-	// Velg første element og refresh skjermbilde
-	$('#selectSikte').prop('selectedIndex', 0).selectmenu('refresh');
-}
-
-//
-// Fyl inn dropdown med kuler
-//
-function initierKuler() {
+//  ********************************************
+//  Initier DropDown Kuler
+// 	********************************************
+function oppdaterListeKuler(tx, liste) {
 	console.log("InitierKuler");
-	var results = {
-		'kule1' : 'Lapua 108gr 6.5mm',
-		'kule2' : 'Sierra 144gr 6.5mm',
-		'kule3' : 'Sierra 123gr 6.5mm',
-		'kule4' : 'Sierra 109gr 6.5mm'
+	var sel = $("#selectKule");
+	var rec;
+
+	// Løp gjennom resultatene og fyll opp listen
+	for (var i = 0; i < liste.rows.length; i++) {
+		rec = liste.rows.item(i);
+		sel.append($("<OPTION />").val(rec.id).text(rec.navn));
 	};
-	$.each(results, function(val, text) {
-		$("#selectKule").append($("<option />").val(val).text(text));
-	});
 
 	// Sett valgt element og oppdater skjerm
-	$("#selectKule").prop('selectedIndex', 2).selectmenu('refresh');
+	sel.prop('selectedIndex', 2).selectmenu('refresh');
+}
+
+function initierKuler(tx) {
+	tx.executeSql('SELECT * FROM KULE', [], oppdaterListeKuler, DbErrorHandler);
 }
 
 //  ********************************************
-// Populate the database
+//  Initier DropDowns
 // 	********************************************
-function initierDatabase() {
-	initierTabellSikte();
-	initierTabellKule();
+function initierDropDowns() {
+	console.log("initierDropDowns");
+	db.transaction(initierKuler, DbErrorHandler);
 }
 
 //  ********************************************
-//  Sikter
+//  Populate the database
+// 	********************************************
+function initierDatabase(tx) {
+	console.log("initierDatabase");
+	initierTabellSikte(tx);
+	initierTabellKule(tx);
+}
+
+//  ********************************************
+//  Opprett og initier tabell Sikter
 //  ********************************************
 function initierTabellSikte(tx) {
-	tx.executeSql('DROP TABLE IF EXISTS SIKTE');
-	tx.executeSql('CREATE TABLE IF NOT EXISTS SIKTE (id unique, navn, gjenge, antKnepp)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (1, "Busk Standard", 1.0, 12)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (2, "Busk Finknepp", 1.0, 24)');
+	console.log("initierTabellSikte");
+	try {
+		tx.executeSql('DROP TABLE IF EXISTS SIKTE');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS SIKTE (id unique, navn, gjenge, antKnepp)');
+		tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (1, "Busk Standard", 1.0, 12)');
+		tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (2, "Busk Finknepp", 1.0, 24)');
+	} catch(err) {
+		alert("initierTabellSikte: " + err);
+	}
 }
 
 //  ********************************************
-//  Kuler
+//  Opprett og initier tabell Kuler
 //  ********************************************
-<<<<<<< HEAD
 function initierTabellKule(tx) {
-=======
-function initierTabellKule(tx) {							// Denne er korrigert.
->>>>>>> a7c4a9f28c583b264eece1b8dbb6cf3801fc46dd
-	tx.executeSql('DROP TABLE IF EXISTS Kule');
-	tx.executeSql('CREATE TABLE IF NOT EXISTS KULE (id unique, navn, bcoeff)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Lapua 108gr 6.5mm", .60)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 109gr 6.5mm", .61)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 123gr 6.5mm", .62)');
-	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Sierra 144gr 6.5mm", .63)');
+	console.log("initierTabellKule");
+	try {
+		tx.executeSql('DROP TABLE IF EXISTS Kule');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS KULE (id unique, navn, balC)');
+		tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (1, "Lapua 108gr 6.6mm", .60)');
+		tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (2, "Sierra 109gr 6.5mm", .61)');
+		tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (3, "Sierra 123gr 6.5mm", .62)');
+		tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (4, "Sierra 144gr 6.5mm", .63)');
+	} catch (err) {
+		alert("initierTabellKule: " + err.message);
+	}
 }
 
-//
-// Transaction error callback
-//
-function errorCB(err) {
-	console.log("Error processing SQL: " + err.code);
+//  ********************************************
+//  Transaction error callback
+//  ********************************************
+function DbErrorHandler(err) {
+	console.log("DbErrorHandler");
+	console.log("Error processing SQL: " + err.message);
 }
-
-//
-// Transaction success callback
-//
-// function successCB() {
-// var db = window.openDatabase("FeltDB", "1.0", "Feltskyting", 200000);
-// db.transaction(queryDB, errorCB);
-// }
