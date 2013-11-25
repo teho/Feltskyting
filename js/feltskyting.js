@@ -95,7 +95,7 @@ function initierTabellSikte(tx) {
 //  ********************************************
 //  Kuler
 //  ********************************************
-function initierTabellKuler(tx) {
+function initierTabellKule(tx) {							// Denne er korrigert.
 	tx.executeSql('DROP TABLE IF EXISTS Kule');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS KULE (id unique, navn, bcoeff)');
 	tx.executeSql('INSERT INTO SIKTE (id, navn, balCoef) VALUES (1, "Lapua 108gr 6.5mm", .60)');
