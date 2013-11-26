@@ -4,8 +4,10 @@
 // **************************
 // Globale variable
 // **************************
+
 var db;
-// Database
+var sel;
+var qryTbl;
 
 console.log("\n************** Starting application **************");
 
@@ -40,9 +42,9 @@ function parameterEndring(obj) {
 //  ********************************************
 //  Initier DropDown Kuler
 // 	********************************************
-function oppdaterListeKuler(tx, liste) {
-	console.log("InitierKuler");
-	var sel = $("#selectKule");
+function oppdaterListe(tx, liste) {
+	console.log("Initier " + qryTbl);
+	// var sel = $("#selectKule");
 	var rec;
 
 	// Løp gjennom resultatene og fyll opp listen
@@ -51,12 +53,13 @@ function oppdaterListeKuler(tx, liste) {
 		sel.append($("<OPTION />").val(rec.id).text(rec.navn));
 	};
 
-	// Sett valgt element og oppdater skjerm
-	sel.prop('selectedIndex', 2).selectmenu('refresh');
+	// Sett valgt element til første element og oppdater skjerm
+	sel.prop('selectedIndex', 0).selectmenu('refresh');
 }
 
-function initierKuler(tx) {
-	tx.executeSql('SELECT * FROM KULE', [], oppdaterListeKuler, DbErrorHandler);
+function initierListe(tx) {
+	//	tx.executeSql('SELECT id, navn FROM KULE', [], oppdaterListeKuler, DbErrorHandler);
+	tx.executeSql('SELECT id, navn FROM ' + qryTbl, [], oppdaterListe, DbErrorHandler);
 }
 
 //  ********************************************
@@ -64,7 +67,16 @@ function initierKuler(tx) {
 // 	********************************************
 function initierDropDowns() {
 	console.log("initierDropDowns");
-	db.transaction(initierKuler, DbErrorHandler);
+
+	// Initier dropdown kuler
+	sel = $("#selectKule");
+	qryTbl = "KULE";
+	db.transaction(initierListe, DbErrorHandler);
+
+	// Initier dropdown vaapen
+	sel = $("#selectVaapen");
+	qryTbl = "VAAPEN";
+	db.transaction(initierListe, DbErrorHandler);
 }
 
 //  ********************************************
@@ -74,6 +86,7 @@ function initierDatabase(tx) {
 	console.log("initierDatabase");
 	initierTabellSikte(tx);
 	initierTabellKule(tx);
+	initierTabellVaapen(tx);
 }
 
 //  ********************************************
@@ -105,6 +118,22 @@ function initierTabellKule(tx) {
 		tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (4, "Sierra 144gr 6.5mm", .63)');
 	} catch (err) {
 		alert("initierTabellKule: " + err.message);
+	}
+}
+
+//  ********************************************
+//  Opprett og initier tabell Vaapen
+//  ********************************************
+function initierTabellVaapen(tx) {
+	console.log("initierTabellVaapen");
+	try {
+		tx.executeSql('DROP TABLE IF EXISTS Vaapen');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS VAAPEN (id unique, navn, kuleId, sikteId)');
+		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (1, "Terje FeltSauer", 2, 1)');
+		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (2, "Terje BaneSauer", 1, 1)');
+		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 3, 2)');
+	} catch (err) {
+		alert("initierTabellVaapen: " + err.message);
 	}
 }
 
