@@ -7,7 +7,7 @@
 
 var db;
 var sel;
-var qryTbl;
+var qryTbl;  // hdsd
 
 console.log("\n************** Starting application **************");
 
@@ -45,10 +45,10 @@ function parameterEndring(obj) {
 function oppdaterListe(tx, liste) {
 	console.log("Initier " + qryTbl);
 	// var sel = $("#selectKule");
-	var rec;
+	var rec, i;
 
 	// Løp gjennom resultatene og fyll opp listen
-	for (var i = 0; i < liste.rows.length; i++) {
+	for (i = 0; i < liste.rows.length; i++) {
 		rec = liste.rows.item(i);
 		sel.append($("<OPTION />").val(rec.id).text(rec.navn));
 	};
@@ -57,9 +57,12 @@ function oppdaterListe(tx, liste) {
 	sel.prop('selectedIndex', 0).selectmenu('refresh');
 }
 
+//  ********************************************
+//  Initier Liste
+// 	********************************************
 function initierListe(tx) {
-	//	tx.executeSql('SELECT id, navn FROM KULE', [], oppdaterListeKuler, DbErrorHandler);
-	tx.executeSql('SELECT id, navn FROM ' + qryTbl, [], oppdaterListe, DbErrorHandler);
+	console.log("initierListe: " + qryTbl);
+	tx.executeSql('SELECT id, navn FROM ' + qryTbl, [], oppdaterListeKuler, DbErrorHandler);
 }
 
 //  ********************************************
@@ -129,9 +132,9 @@ function initierTabellVaapen(tx) {
 	try {
 		tx.executeSql('DROP TABLE IF EXISTS Vaapen');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS VAAPEN (id unique, navn, kuleId, sikteId)');
-		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (1, "Terje FeltSauer", 2, 1)');
-		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (2, "Terje BaneSauer", 1, 1)');
-		tx.executeSql('INSERT INTO KULE (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 3, 2)');
+		tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (1, "Terje FeltSauer", 2, 1)');
+		tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (2, "Terje BaneSauer", 1, 1)');
+		tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 3, 2)');
 	} catch (err) {
 		alert("initierTabellVaapen: " + err.message);
 	}
