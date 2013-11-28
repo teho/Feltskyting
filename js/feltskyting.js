@@ -60,7 +60,7 @@ function oppdaterListe(tx, res, selId) {
 function initierListe(tx, tbl, selId) {
     console.log("initierListe: " + tbl);
     tx.executeSql('SELECT id, navn FROM ' + tbl + " order by navn", [], function(tx, res) {
-        oppdaterListe(tx, res, selId)
+        oppdaterListe(tx, res, selId);
     }, DbErrorHandler);
 }
 
