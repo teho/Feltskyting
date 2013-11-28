@@ -7,7 +7,7 @@
 
 var db;
 
-console.log("\n************** Starting application **************");
+console.log("\n\n\n************** Starting application **************");
 
 //  ********************************************
 // Wait for device API libraries to load
