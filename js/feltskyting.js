@@ -157,5 +157,5 @@ function DbErrorHandler(err) {
 
 $(document).bind('taphold', 'DIV.SELECT', tapholdHandler);
 function tapholdHandler(event) {
-    console.log("tapholdHandler")
+    console.log("tapholdHandler");
 }
