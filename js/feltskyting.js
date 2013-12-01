@@ -146,3 +146,16 @@ function DbErrorHandler(err) {
     console.log("DbErrorHandler");
     console.log("Error processing SQL: " + err.message);
 }
+
+//  ********************************************
+//  Function for tap and hold
+//  ********************************************
+
+// function tapholdHandler(event) {
+// $(event.target).addClass("taphold");
+// }
+
+$(document).bind('taphold', 'DIV.SELECT', tapholdHandler);
+function tapholdHandler(event) {
+    console.log("tapholdHandler");
+}
