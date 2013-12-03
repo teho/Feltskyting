@@ -15,7 +15,7 @@
 
     </head>
     <body>
-        <div data-role="page" data-fullscreen="true" id="page">
+        <div data-role="page" data-fullscreen="true" id="hovedside">
             <div data-role="header" data-theme="c">
                 <h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Feltskyting</h1>
             </div>
@@ -34,7 +34,7 @@
             <div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
                 <ul data-role="listview" data-corners="false">
                     <li>
-                        <a href="database.html">Linje 1</a>
+                        <a href="#vaapenside">Linje 1</a>
                     </li>
                     <li>
                         linje 2
@@ -47,9 +47,21 @@
                     </li>
                 </ul>
             </div>
-            <div class="footer">
+            <div class="footer" id="sidefot">
                 Laget av Terje Hopsø
             </div>
         </div>
+        <div data-role="page" data-fullscreen="true" id="vaapenside">
+            <div data-role="header" data-theme="c">
+                <h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Våpen</h1>
+            </div>
+            <div data-role="content">
+				<a href="#hovedside" data-rel="back" data-role="button">Try Again</a>            	
+            </div>
+            <div class="footer" id="sidefot">
+                Laget av Terje Hopsø
+            </div>
+        </div>
+
     </body>
 </html>
