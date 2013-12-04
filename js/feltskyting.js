@@ -41,7 +41,7 @@ function parameterEndring(obj) {
 //  Oppdater Dropdown fra resultatsett
 // 	********************************************
 function oppdaterListe(tx, res, selId) {
-    console.log("oppdaterListe " + selId.name);
+    console.log("oppdaterListe");
     var rec, i;
 
     // Løp gjennom resultatene og fyll opp listen
@@ -150,12 +150,21 @@ function DbErrorHandler(err) {
 //  ********************************************
 //  Function for tap and hold
 //  ********************************************
-
-// function tapholdHandler(event) {
-// $(event.target).addClass("taphold");
-// }
-
 $(document).bind('taphold', 'DIV.SELECT', tapholdHandler);
+
 function tapholdHandler(event) {
     console.log("tapholdHandler");
 }
+
+//  ********************************************
+//  TESTING
+//  ********************************************
+function sjekkBasic() {
+    console.log("sjekkBasic");
+    //get
+    var bla = $('#basic').val();
+    console.log("Value entered: " + bla)
+    //set
+    $('#basic').val('Skriv inn ny tekst');
+}
+

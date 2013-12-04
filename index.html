@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+	<head>
+		<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, max-scale=1">
 
-        <title>Feltskyting</title>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
-        
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+		<title>Feltskyting</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
 
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/feltskyting.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
 
-    </head>
-    <body>
-        <div data-role="page" data-fullscreen="true" id="hovedside">
-            <div data-role="header" data-theme="c">
-                <h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Feltskyting</h1>
-            </div>
-            <div data-role="content">
-                <div style="width: 80%; margin: auto; max-width: 340px;">
-                    <select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
-                    onchange="parameterEndring(this)"><!-- Empty --></select>
-                    <select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)"><!-- Empty --></select>
-                </div>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/feltskyting.js"></script>
 
-                <div style="display: block; height: 70px; margin: a; alignment-baseline: center;  text-align: center; background: yellow;">
-                    <a href="index.html" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
-                    <a href="weather.html" data-role="button" data-inline="true" data-theme="a">Vær</a>
-                </div>
-            </div>
-            <div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
-                <ul data-role="listview" data-corners="false">
-                    <li>
-                        <a href="#vaapenside">Linje 1</a>
-                    </li>
-                    <li>
-                        linje 2
-                    </li>
-                    <li>
-                        linje 3
-                    </li>
-                    <li>
-                        linje 4
-                    </li>
-                </ul>
-            </div>
-            <div class="footer" id="sidefot">
-                Laget av Terje Hopsø
-            </div>
-        </div>
-        <div data-role="page" data-fullscreen="true" id="vaapenside">
-            <div data-role="header" data-theme="c">
-                <h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Våpen</h1>
-            </div>
-            <div data-role="content">
-				<a href="#hovedside" data-rel="back" data-role="button">Try Again</a>            	
-            </div>
-            <div class="footer" id="sidefot">
-                Laget av Terje Hopsø
-            </div>
-        </div>
+	</head>
+	<body>
+		<div data-role="page" data-fullscreen="true" id="hovedside">
+			<div data-role="header" data-theme="c">
+				<h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Feltskyting</h1>
+			</div>
+			<div data-role="content">
+				<div style="width: 80%; margin: auto; max-width: 340px;">
+					<select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
+					onchange="parameterEndring(this)">
+						<!-- Empty -->
+					</select>
+					<select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)">
+						<!-- Empty -->
+					</select>
+				</div>
 
-    </body>
+				<div style="display: block; height: 70px; margin: a; alignment-baseline: center;  text-align: center; background: yellow;">
+					<a href="index.html" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
+					<a href="weather.html" data-role="button" data-inline="true" data-theme="a">Vær</a>
+				</div>
+			</div>
+			<div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
+				<ul data-role="listview" data-corners="false">
+					<li>
+						<a href="#vaapenside">Linje 1</a>
+					</li>
+					<li>
+						linje 2
+					</li>
+					<li>
+						linje 3
+					</li>
+					<li>
+						linje 4
+					</li>
+				</ul>
+			</div>
+			<div class="footer" id="sidefot">
+				Laget av Terje Hopsø
+			</div>
+		</div>
+		<div data-role="page" data-fullscreen="true" id="vaapenside">
+			<div data-role="header" data-theme="c">
+				<h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Våpen</h1>
+			</div>
+			<div data-role="content">
+				<a href="#hovedside" data-rel="back" data-role="button">Try Again</a>
+				<label for="basic">Text Input:</label>
+				<input type="text" name="name" id="basic" value="" data-theme="a" />
+				<div data-role="button" onclick="sjekkBasic()">Trykk meg</div>
+			</div>
+			<div class="footer" id="sidefot">
+				Laget av Terje Hopsø
+			</div>
+		</div>
+
+	</body>
 </html>
