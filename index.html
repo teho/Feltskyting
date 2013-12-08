@@ -15,9 +15,12 @@
 
 	</head>
 	<body>
-		<div data-role="page" data-fullscreen="true" id="hovedside">
-			<div data-role="header" data-theme="c">
-				<h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Feltskyting</h1>
+		<!-- ********* -->
+		<!-- HOVEDSIDE -->
+		<!-- ********* -->
+		<div data-role="page" data-fullscreen="true" id="hovedside" data-title="Feltskyting">
+			<div data-role="header" data-theme="a">
+				<h1 style="font-size: 36px">Feltskyting</h1>
 			</div>
 			<div data-role="content">
 				<div style="width: 80%; margin: auto; max-width: 340px;">
@@ -25,36 +28,83 @@
 					onchange="parameterEndring(this)">
 						<!-- Empty -->
 					</select>
-					<select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)">
-						<!-- Empty -->
-					</select>
 				</div>
 
-				<div style="display: block; height: 70px; margin: a; alignment-baseline: center;  text-align: center; background: yellow;">
-					<a href="index.html" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
+				<div style="margin-bottom: 20px; text-align: center; background: yellow;">
+					<a href="#vaapenside" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
 					<a href="weather.html" data-role="button" data-inline="true" data-theme="a">Vær</a>
 				</div>
-			</div>
 			<div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
 				<ul data-role="listview" data-corners="false">
-					<li>
-						<a href="#vaapenside">Våpenside</a>
-					</li>
+					<li>100  -    0</li>
+					<li>109  -    1</li>
+					<li>119  -    2</li>
+					<li>130  -    3</li>
+					<li>141  -    4</li>
+					<li>154  -    5</li>
+					<li>178  -    6</li>
+					<li>191  -    7</li>
+					<li>209  -    8</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
+					<li>xxx  -   xx</li>
 				</ul>
+			</div>
 			</div>
 			<div class="footer" id="sidefot">
 				Laget av Terje Hopsø
 			</div>
 		</div>
-		<div data-role="page" data-fullscreen="true" id="vaapenside">
-			<div data-role="header" data-theme="c">
-				<h1 style="font-size: 48px; color: rgba(18,0,255,1); margin: 20px auto 15px auto;">Våpen</h1>
+		<!-- ********** -->
+		<!-- VAAPENSIDE -->
+		<!-- ********** -->
+		<div data-role="page" data-fullscreen="true" id="vaapenside" data-title="Våpen">
+			<div data-role="header">
+				<h1 style="font-size: 36px;">Våpen</h1>
 			</div>
 			<div data-role="content">
+				<div style="width:50%; margin: auto;">
+				<ul data-role="listview">
+					<li>
+						Linje 1
+					</li>
+					<li>
+						Linje 2
+					</li>
+					<li>
+						Linje 3
+					</li>
+				</ul></div>
+					<select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)">
+						<!-- Empty -->
+					</select>
 				<a href="#hovedside" data-rel="back" data-role="button">Try Again</a>
 				<label for="basic">Text Input:</label>
 				<input type="text" name="name" id="basic" value="" data-theme="a" />
-				<div data-role="button" onclick="sjekkBasic()">Trykk meg</div>
+				<div data-role="button" onclick="sjekkBasic()">
+					Trykk meg
+				</div>
 			</div>
 			<div class="footer" id="sidefot">
 				Laget av Terje Hopsø

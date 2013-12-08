@@ -70,15 +70,20 @@ function initierListe(tx, tbl, selId) {
 function initierDropDowns() {
     console.log("initierDropDowns");
     // Fyll inn dropdown for våpen
-    db.transaction(function(tx) {
-        initierListe(tx, "VAAPEN", $("#selectVaapen"));
-    }, DbErrorHandler);
+    // db.transaction(function(tx) {
+    // initierListe(tx, "VAAPEN", $("#selectVaapen"));
+    // }, DbErrorHandler);
+    initierDropDown("VAAPEN", "#selectVaapen");
+}
 
+//  ********************************************
+//  Initier DropDown
+// 	********************************************
+function initierDropDown(tbl, side) {
     // Fyll inn dropdown for kuler
     db.transaction(function(tx) {
-        initierListe(tx, "KULE", $("#selectKule"));
+        initierListe(tx, tbl, $(side));
     }, DbErrorHandler);
-
 }
 
 //  ********************************************
@@ -157,14 +162,28 @@ function tapholdHandler(event) {
 }
 
 //  ********************************************
+//  Eventhandlers for enter/leave pages
+//  ********************************************
+$(function() {
+    $('#vaapenside').on('pagebeforeshow', function() {
+        console.log("vaapenside: pagebeforeshow triggered");
+        initierDropDown("KULE", "#selectKule");
+    });
+    $('#vaapenside').on('pagebeforehide', function() {
+        console.log("vaapenside: pagebeforehide triggered");
+        $('#selectKule').find('option').remove().end();
+    });
+});
+
+
+//  ********************************************
 //  TESTING
 //  ********************************************
 function sjekkBasic() {
     console.log("sjekkBasic");
     //get
     var bla = $('#basic').val();
-    console.log("Value entered: " + bla)
+    console.log("Value entered: " + bla);
     //set
     $('#basic').val('Skriv inn ny tekst');
 }
-
