@@ -19,11 +19,11 @@
 		<!-- HOVEDSIDE -->
 		<!-- ********* -->
 		<div data-role="page" data-fullscreen="true" id="hovedside" data-title="Feltskyting">
-			<div data-role="header" data-theme="a">
+			<div data-role="header" data-theme="a" data-position="fixed" data-fullscreen="false">
 				<h1 style="font-size: 36px">Feltskyting</h1>
 			</div>
 			<div data-role="content">
-				<div style="width: 80%; margin: auto; max-width: 340px;">
+				<div style="width: 80%; margin: auto; margin-top: 50px; max-width: 340px;">
 					<select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
 					onchange="parameterEndring(this)">
 						<!-- Empty -->
@@ -72,8 +72,8 @@
 				</ul>
 			</div>
 			</div>
-			<div class="footer" id="sidefot">
-				Laget av Terje Hopsø
+			<div data-role="footer" data-position="fixed" data-fullscreen="false">
+				<h1>Laget av Terje Hopsø</h1>
 			</div>
 		</div>
 		<!-- ********** -->
