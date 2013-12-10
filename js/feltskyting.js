@@ -6,6 +6,7 @@
 // **************************
 
 var db;
+var isVaapenSideLoaded = false;
 
 console.log("\n\n\n************** Starting application **************");
 
@@ -51,7 +52,7 @@ function oppdaterListe(tx, res, selId) {
     };
 
     // Sett valgt element til første element og oppdater skjerm
-    selId.prop('selectedIndex', 1).selectmenu('refresh');
+    selId.prop('selectedIndex', 0).selectmenu('refresh');
 }
 
 //  ********************************************
@@ -159,6 +160,7 @@ $(document).bind('taphold', 'DIV.SELECT', tapholdHandler);
 
 function tapholdHandler(event) {
     console.log("tapholdHandler");
+        $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
 }
 
 //  ********************************************
@@ -167,14 +169,19 @@ function tapholdHandler(event) {
 $(function() {
     $('#vaapenside').on('pagebeforeshow', function() {
         console.log("vaapenside: pagebeforeshow triggered");
-        initierDropDown("KULE", "#selectKule");
+        if (!isVaapenSideLoaded) {
+            initierDropDown("KULE", "#selectKule");
+            isVaapenSideLoaded = true;
+            console.log("\tloaded KULE");
+        }
     });
     $('#vaapenside').on('pagebeforehide', function() {
         console.log("vaapenside: pagebeforehide triggered");
-        $('#selectKule').find('option').remove().end();
+        // $('#selectKule').find('option').remove().end();
+        // $('#selectKule').selectmenu('refresh');
+        // isVaapenSideLoaded = false;
     });
 });
-
 
 //  ********************************************
 //  TESTING
