@@ -29,6 +29,37 @@ function onDeviceReady() {
     db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
 }
 
+window.onbeforeunload = function () {
+    console.log("window.onBeforeUnload");
+};
+window.onunload = function () {
+    console.log("window.onUnload");
+    // navigator.app.exitApp();
+};
+
+    // document.addEventListener("menubutton", function () { 
+        // console.log('Menu button');
+    // }, false);  
+// 
+    // document.addEventListener("searchbutton", function () { 
+        // console.log('Search button');
+    // }, false);                      
+// 
+    // document.addEventListener("backbutton", function () { 
+        // console.log('Back button');
+    // }, false); 
+    
+
+document.addEventListener("resume", onResume, false);
+function onResume() {
+    console.log("Resume event");
+};
+
+document.addEventListener("pause", onPause, false);
+function onPause() {
+    console.log("Pause event");
+};
+    
 //  ********************************************
 //  Parameter Endret
 // 	********************************************
@@ -95,6 +126,7 @@ function initierDatabase(tx) {
     initierTabellSikte(tx);
     initierTabellKule(tx);
     initierTabellVaapen(tx);
+    // initierTabellSisteBruk(tx);
 }
 
 //  ********************************************
