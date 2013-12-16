@@ -29,26 +29,25 @@ function onDeviceReady() {
     db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
 }
 
-window.onbeforeunload = function () {
+window.onbeforeunload = function() {
     console.log("window.onBeforeUnload");
 };
-window.onunload = function () {
+window.onunload = function() {
     console.log("window.onUnload");
     // navigator.app.exitApp();
 };
 
-    // document.addEventListener("menubutton", function () { 
-        // console.log('Menu button');
-    // }, false);  
-// 
-    // document.addEventListener("searchbutton", function () { 
-        // console.log('Search button');
-    // }, false);                      
-// 
-    // document.addEventListener("backbutton", function () { 
-        // console.log('Back button');
-    // }, false); 
-    
+// document.addEventListener("menubutton", function () {
+// console.log('Menu button');
+// }, false);
+//
+// document.addEventListener("searchbutton", function () {
+// console.log('Search button');
+// }, false);
+//
+// document.addEventListener("backbutton", function () {
+// console.log('Back button');
+// }, false);
 
 document.addEventListener("resume", onResume, false);
 function onResume() {
@@ -59,7 +58,7 @@ document.addEventListener("pause", onPause, false);
 function onPause() {
     console.log("Pause event");
 };
-    
+
 //  ********************************************
 //  Parameter Endret
 // 	********************************************
@@ -67,6 +66,9 @@ function parameterEndring(obj) {
     console.log("parameterEndring");
     // console.log(obj.options[obj.selectedIndex].value);
     // console.log(obj.options[obj.selectedIndex].innerHTML);
+    $("#selectvaapen").on('taphold', function(event) {
+        console.log("tapholdHandler");
+    });
 }
 
 //  ********************************************
@@ -82,7 +84,7 @@ function oppdaterListe(tx, res, selId) {
         selId.append($("<OPTION />").val(rec.id).text(rec.navn));
     };
 
-    // Sett valgt element til første element og oppdater skjerm
+    // Sett fokus på første element og oppdater skjerm
     selId.prop('selectedIndex', 0).selectmenu('refresh');
 }
 
@@ -103,9 +105,9 @@ function initierDropDowns() {
     console.log("initierDropDowns");
     // Fyll inn dropdown for våpen
     // db.transaction(function(tx) {
-    // initierListe(tx, "VAAPEN", $("#selectVaapen"));
+    // initierListe(tx, "VAAPEN", $("#selectvaapen"));
     // }, DbErrorHandler);
-    initierDropDown("VAAPEN", "#selectVaapen");
+    initierDropDown("VAAPEN", "#selectvaapen");
 }
 
 //  ********************************************
@@ -188,12 +190,13 @@ function DbErrorHandler(err) {
 //  ********************************************
 //  Function for tap and hold
 //  ********************************************
-//$(document).bind('taphold', '#selectVaapen', tapholdHandler);
-$('#selectVaapen').on('taphold', function(event) {
-    console.log("tapholdHandler");
-    console.log(event.target);
-    // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
-});
+// $(function() {
+    // $("#selectvaapen").bind('taphold', function(event) {
+        // console.log("tapholdHandler");
+        // // console.log(event.target);
+        // // // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
+    // });
+// });
 
 //  ********************************************
 //  Eventhandlers for enter/leave pages

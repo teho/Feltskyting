@@ -23,21 +23,14 @@
 				<h1 style="font-size: 150%">Feltskyting</h1>
 			</div>
 			<div data-role="content">
-				<div style="width: 80%; margin: auto; margin-top: 50px; max-width: 340px;">
-					<select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
+				<!-- div style="width: 80%; margin: auto; margin-top: 50px; max-width: 340px;"  -->
+					<!-- select id="selectvaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a" -->
+					<select id="selectvaapen" data-native-menu="false" 
 					onchange="parameterEndring(this)">
-					<script>
-					    $('#selectVaapen').on('taphold', function(event) {
-    console.log("tapholdHandler");
-    console.log(event.target);
-    // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
-});
-
-					</script>
 						<!-- Empty -->
 					</select>
-					<div>Sierra 144gr 6.5mm, 812 m/s</div>
-				</div>
+					<div id="kuleinfo" style="margin: 20px;">Sierra 144gr 6.5mm, 812 m/s</div>
+				<!-- /div -->
 
 				<div style="margin-bottom: 20px; text-align: center; background: yellow;">
 					<a href="#vaapenside" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
