@@ -20,12 +20,20 @@
 		<!-- ********* -->
 		<div data-role="page" data-fullscreen="true" id="hovedside" data-title="Feltskyting">
 			<div data-role="header" data-theme="a" data-position="fixed" data-fullscreen="false">
-				<h1 style="font-size: 36px">Feltskyting</h1>
+				<h1 style="font-size: 150%">Feltskyting</h1>
 			</div>
 			<div data-role="content">
 				<div style="width: 80%; margin: auto; margin-top: 50px; max-width: 340px;">
 					<select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
 					onchange="parameterEndring(this)">
+					<script>
+					    $('#selectVaapen').on('taphold', function(event) {
+    console.log("tapholdHandler");
+    console.log(event.target);
+    // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
+});
+
+					</script>
 						<!-- Empty -->
 					</select>
 					<div>Sierra 144gr 6.5mm, 812 m/s</div>
@@ -82,7 +90,7 @@
 		<!-- ********** -->
 		<div data-role="page" data-fullscreen="true" id="vaapenside" data-title="Våpenside">
 			<div data-role="header" data-theme="a" data-position="fixed" data-fullscreen="false">
-				<h1 style="font-size: 36px;">Våpen</h1>
+				<h1 style="font-size: 150%;">Våpen</h1>
 			</div>
 			<div data-role="content">
 				<div style="width:50%; margin: auto;">

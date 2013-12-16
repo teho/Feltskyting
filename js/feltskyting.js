@@ -188,12 +188,12 @@ function DbErrorHandler(err) {
 //  ********************************************
 //  Function for tap and hold
 //  ********************************************
-$(document).bind('taphold', 'DIV.SELECT', tapholdHandler);
-
-function tapholdHandler(event) {
+//$(document).bind('taphold', '#selectVaapen', tapholdHandler);
+$('#selectVaapen').on('taphold', function(event) {
     console.log("tapholdHandler");
-        $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
-}
+    console.log(event.target);
+    // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
+});
 
 //  ********************************************
 //  Eventhandlers for enter/leave pages
