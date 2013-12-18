@@ -64,11 +64,9 @@ function onPause() {
 // 	********************************************
 function parameterEndring(obj) {
     console.log("parameterEndring");
+    console.log(obj);
     // console.log(obj.options[obj.selectedIndex].value);
-    // console.log(obj.options[obj.selectedIndex].innerHTML);
-    $("#selectvaapen").on('taphold', function(event) {
-        console.log("tapholdHandler");
-    });
+    console.log(obj.options[obj.selectedIndex].innerHTML);
 }
 
 //  ********************************************
@@ -105,9 +103,9 @@ function initierDropDowns() {
     console.log("initierDropDowns");
     // Fyll inn dropdown for våpen
     // db.transaction(function(tx) {
-    // initierListe(tx, "VAAPEN", $("#selectvaapen"));
+    // initierListe(tx, "VAAPEN", $("#selectVaapen"));
     // }, DbErrorHandler);
-    initierDropDown("VAAPEN", "#selectvaapen");
+    initierDropDown("VAAPEN", "#selectVaapen");
 }
 
 //  ********************************************
@@ -190,13 +188,13 @@ function DbErrorHandler(err) {
 //  ********************************************
 //  Function for tap and hold
 //  ********************************************
-// $(function() {
-    // $("#selectvaapen").bind('taphold', function(event) {
-        // console.log("tapholdHandler");
-        // // console.log(event.target);
-        // // // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
-    // });
-// });
+$(function() {
+    $("#selectVaapen").bind('taphold', function(event) {
+        console.log("tapholdHandler");
+        // console.log(event.target);
+        // // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
+    });
+});
 
 //  ********************************************
 //  Eventhandlers for enter/leave pages
