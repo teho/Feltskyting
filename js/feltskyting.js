@@ -186,17 +186,6 @@ function DbErrorHandler(err) {
 }
 
 //  ********************************************
-//  Function for tap and hold
-//  ********************************************
-$(function() {
-    $("#selectVaapen").bind('taphold', function(event) {
-        console.log("tapholdHandler");
-        // console.log(event.target);
-        // // $('#selectKule').prop('selectedIndex', 3).selectmenu('refresh');
-    });
-});
-
-//  ********************************************
 //  Eventhandlers for enter/leave pages
 //  ********************************************
 $(function() {
@@ -213,6 +202,12 @@ $(function() {
         // $('#selectKule').find('option').remove().end();
         // $('#selectKule').selectmenu('refresh');
         // isVaapenSideLoaded = false;
+    });
+    /* ****************
+     * Tap and Hold
+     ******************/
+    $("#selectVaapen-button").bind('taphold', function(event) {
+        console.log("tapholdHandler");
     });
 });
 
