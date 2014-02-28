@@ -189,8 +189,8 @@ function DbErrorHandler(err) {
 //  Eventhandlers for enter/leave pages
 //  ********************************************
 $(function() {
-    $('#vaapenside').on('pagebeforeshow', function() {
-        console.log("vaapenside: pagebeforeshow triggered");
+    $('#vaapenSide').on('pagebeforeshow', function() {
+        console.log("vaapenSide: pagebeforeshow triggered");
         if (!isVaapenSideLoaded) {
             initierDropDown("KULE", "#selectKule");
             isVaapenSideLoaded = true;
@@ -208,6 +208,7 @@ $(function() {
      ******************/
     $("#selectVaapen-button").bind('taphold', function(event) {
         console.log("tapholdHandler");
+        $.mobile.changePage( "#vaapenSide" );
     });
 });
 
