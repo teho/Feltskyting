@@ -29,10 +29,10 @@ function onDeviceReady() {
     db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
 }
 
-window.onbeforeunload = function() {
+window.onBeforeUnload = function() {
     console.log("window.onBeforeUnload");
 };
-window.onunload = function() {
+window.onUnload = function() {
     console.log("window.onUnload");
     // navigator.app.exitApp();
 };
@@ -60,7 +60,7 @@ function onPause() {
 };
 
 //  ********************************************
-//  Parameter Endret
+//  Parameter endret
 // 	********************************************
 function parameterEndring(obj) {
     console.log("parameterEndring");
