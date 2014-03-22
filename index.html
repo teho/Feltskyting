@@ -12,6 +12,7 @@
 
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/feltskyting.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/database.js"></script>
 
 	</head>
 	<body>
@@ -32,7 +33,7 @@
 				<!-- /div -->
 
 				<div style="margin-bottom: 20px; text-align: center; background: yellow;">
-					<a href="#vaapenSide" data-role="button" data-inline="true" data-theme="a">Tabelldata</a>
+					<a href="#vaapenOppsett" data-role="button" data-inline="true" data-theme="a">Tabell</a>
 					<a href="weather.html" data-role="button" data-inline="true" data-theme="a">Vær</a>
 				</div>
 			<div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
@@ -78,15 +79,15 @@
 			</div>
 		</div>
 		<!-- ********** -->
-		<!-- VAAPENSIDE -->
+		<!-- VAAPENOPPSETT -->
 		<!-- ********** -->
-		<div data-role="page" data-fullscreen="true" id="vaapenSide" data-title="Våpenside">
+		<div data-role="page" data-fullscreen="true" id="vaapenOppsett" data-title="Våpenoppsett">
 			<div data-role="header" data-theme="a" data-position="fixed" data-fullscreen="false">
 				<h1 style="font-size: 150%;">Våpen</h1>
 			</div>
 			<div data-role="content">
 				<div style="width:50%; margin: auto;">
-				<ul data-role="listview" dat-theme="a" id="vaapenList">
+				<ul data-role="listview" data-theme="a" id="vaapenList">
 					<li>
 						Våpen 1
 					</li>
@@ -112,5 +113,13 @@
 			</div>
 		</div>
 
+		<!-- ********** -->
+		<!-- VAAPEN -->
+		<!-- ********** -->
+		<div date-role="page" data-fullscreen="true" id="vapenEdit" data-title="Våpen">
+			<div data-role="header" data-theme="a" data-position="fixed" data-fullscreen="false">
+				<h1 style="font-size: 150%;">Våpen</h1>
+			</div>
+		</div>
 	</body>
 </html>
