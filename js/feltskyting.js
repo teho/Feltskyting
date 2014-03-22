@@ -203,9 +203,9 @@ $(function() {
         // $('#selectKule').selectmenu('refresh');
         // isVaapenSideLoaded = false;
     });
-    /* ****************
-     * Tap and Hold
-     ******************/
+//  *********************************************
+//  Tap and Hold
+//  *********************************************
     $("#selectVaapen-button").bind('taphold', function(event) {
         console.log("tapholdHandler");
         $.mobile.changePage( "#vaapenSide" );
