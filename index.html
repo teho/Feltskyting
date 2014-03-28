@@ -25,10 +25,13 @@
                 <h1 style="font-size: 250%">Feltskyting</h1>
             </div>
             <div data-role="content">
-                <select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"
-                onchange="parameterEndring(this)">
-                    <!-- Empty -->
-                </select>
+                <div class="ui-field-contain" style="border: 2px solid red;">
+                    <!-- select id="selectVaapen" data-native-menu="false" data-inline="false" data-icon="false" data-theme="a"  -->
+                    <select id="selectVaapen" data-icon="false" data-theme="a"
+                    onchange="parameterEndring(this)">
+                        <!-- Empty -->
+                    </select>
+                </div>
                 <div id="kuleinfo" style="margin: 20px;">
                     Sierra 144gr 6.5mm, 812 m/s
                 </div>
@@ -154,7 +157,7 @@
             </div>
             <div data-role="content">
                 <div style="width:50%; margin: auto;">
-                    <ul data-role="listview" data-theme="a" id="vaapenList">
+                    <ul data-role="listview" data-theme="a" id="vaapenList" style="margin-bottom: 100px;">
                         <li>
                             Våpen 1
                         </li>
@@ -166,7 +169,7 @@
                         </li>
                     </ul>
                 </div>
-                <select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)">
+                <select id="selectKule" data-native-menu="false" data-icon="false" data-theme="a" onchange="parameterEndring(this)" style="margin-top: 50px; border: 2px solid red;">
                     <!-- Empty -->
                 </select>
                 <a href="#hovedside" data-rel="back" data-role="button" data-transition="none">Try Again</a>
