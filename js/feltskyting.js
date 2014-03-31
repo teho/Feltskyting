@@ -26,7 +26,7 @@ function onDeviceReady() {
 		alert(err);
 	}
 	// Skal fjernes senere. Skal være brukerstyrt
-	db.transaction(initierDatabase, DbErrorHandler, initierObjects);
+	db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
 }
 
 window.onBeforeUnload = function() {
@@ -72,51 +72,51 @@ function parameterEndring(obj) {
 //  ********************************************
 //  Oppdater Dropdown fra resultatsett
 // 	********************************************
-function oppdaterListe(tx, res, id, elem) {
+function oppdaterListe(tx, res, selId) {
 	console.log("oppdaterListe");
 	var rec, i;
 
 	// Løp gjennom resultatene og fyll opp listen
 	for ( i = 0; i < res.rows.length; i++) {
 		rec = res.rows.item(i);
-		id.append($(elem).val(rec.id).text(rec.navn));
+		selId.append($("<option />").val(rec.id).text(rec.navn));
 	};
 
 	// Sett fokus på første element og oppdater skjerm
-	id.prop('selectedIndex', 1).selectmenu('refresh');
+	selId.prop('selectedIndex', 1).selectmenu('refresh');
 }
 
 //  ********************************************
 //  Initier Liste
 // 	********************************************
-function initierListe(tx, tabell, id, elem) {
-	console.log("initierListe: " + tabell);
-	tx.executeSql('SELECT id, navn FROM ' + tabell + " order by navn", [], function(tx, res) {
-		oppdaterListe(tx, res, id, elem);
+function initierListe(tx, tbl, selId) {
+	console.log("initierListe: " + tbl);
+	tx.executeSql('SELECT id, navn FROM ' + tbl + " order by navn", [], function(tx, res) {
+		oppdaterListe(tx, res, selId);
+	}, DbErrorHandler);
+}
+
+//  ********************************************
+//  Initier DropDown
+// 	********************************************
+function initierDropDown(tbl, selId) {
+	// Fyll inn dropdown for kuler
+	db.transaction(function(tx) {
+		initierListe(tx, tbl, $(selId));
 	}, DbErrorHandler);
 }
 
 //  ********************************************
 //  Initier Objects (dropdowns, listview, etc.)
 // 	********************************************
-function initierObjects() {
+function initierDropDowns() {
 	console.log("initierDropDowns");
 	// Fyll inn dropdown for våpen
 	// db.transaction(function(tx) {
 	// initierListe(tx, "VAAPEN", $("#selectVaapen"));
 	// }, DbErrorHandler);
-	initierObject("VAAPEN", "#selectVaapen", "<option />");
- 	initierObject("VAAPEN", "#vaapenList", "<li />");
-}
-
-//  ********************************************
-//  Initier DropDown
-// 	********************************************
-function initierObject(tabell, id, elem) {
-	// Fyll inn dropdown for kuler
-	db.transaction(function(tx) {
-		initierListe(tx, tabell, $(id), elem);
-	}, DbErrorHandler);
+	initierDropDown("VAAPEN", "#selectVaapen");
+// 	initierListView("VAAPEN", "#vaapenList", "<li />");
 }
 
 //  ********************************************
@@ -145,7 +145,7 @@ $(function() {
 	$('#vaapenOppsett').on('pagebeforeshow', function() {
 		console.log("vaapenOppsett: pagebeforeshow triggered");
 		if (!isVaapenOppsettLoaded) {
-			initierObject("KULE", "#selectKule", "<option />");
+			initierDropDown("KULE", "#selectKule");
 			isVaapenOppsettLoaded = true;
 			console.log("\tloaded KULE");
 		}
@@ -166,6 +166,13 @@ $(function() {
 			transition : "none"
 		});
 	});
+	//  *********************************************
+	//  vaapenListClick
+	//  *********************************************
+    $("#vaapenList li").click(function() {
+        console.log("vaapenListClick event");
+        console.log($(this).find("a").text());
+    });
 });
 
 //  ********************************************
