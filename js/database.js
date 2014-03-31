@@ -46,7 +46,13 @@ function initierTabellVaapen(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS VAAPEN (id unique, navn, kuleId, sikteId)');
         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (1, "Terje FeltSauer", 2, 1)');
         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (2, "Terje BaneSauer", 1, 1)');
-        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 2, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (4, "Våpen 4 Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (5, "Våpen 5 Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (6, "Våpen 6 Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (7, "Våpen 7 Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (8, "Våpen 8 Sauer", 3, 2)');
+        tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (9, "Våpen 9 Sauer", 3, 2)');
     } catch (err) {
         alert("initierTabellVaapen: " + err.message);
     }

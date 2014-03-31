@@ -19,7 +19,6 @@
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
-
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -71,7 +70,7 @@ body {
 
 h1 {
     font-size:24px;
-    font-weight:normal;
+    font-weight:bold;
     margin:0px;
     overflow:visible;
     padding:0px;
@@ -131,32 +130,61 @@ h1 {
 /*
  * Override theme css-file. Remove focus shadow.
  */
-.uxi-focus,
-.uxi-btn:focus {
+.ui-focus,
+.ui-btn:focus {
 	-moz-box-shadow: inset 0 0 0px #7e0408 /*{global-active-background-color}*/, 0 0 0px #7e0408 /*{global-active-background-color}*/;
 	-webkit-box-shadow: inset 0 0 0px #7e0408 /*{global-active-background-color}*/, 0 0 0px #7e0408 /*{global-active-background-color}*/;
 	box-shadow: inset 0 0 0px #7e0408 /*{global-active-background-color}*/, 0 0 0px #7e0408 /*{global-active-background-color}*/;
 }
-.uxi-input-text.ui-focus,
-.uxi-input-search.ui-focus {
+.ui-input-text.ui-focus,
+.ui-input-search.ui-focus {
 	-moz-box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;
 	-webkit-box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;
 	box-shadow: 0 0 0px #7e0408 /*{global-active-background-color}*/;	
 }
 
-#kuleinfo {
-	padding: 20px;
-	margin: 0px;
+.main-page {
+    width: 80%;
+    margin: 0 auto;
 }
 
-#overskrift {
-	font-size: 2.2em;
+#selectVaapen {
+    width: 100%;
+    font-size: 1.6em;
+}
+
+#kuleinfo {
+	padding: 20px;
+	margin: 0;
 }
 
 #vaapenList {
-	height: 100px;
-	margin: 20px;
-	padding: 10px;
-	border: 2px solid #AAAAAA;
+    width: 100%;
+	height: 150px;
+	padding: 5px 0;
+	border: 2px solid #666666;
 	overflow: auto;
+	margin-bottom: 20px 0;
+}
+
+#vaapenList li a {
+    font-size: 1.6em;
+    padding: 5px;
+    margin: 20px 4px;
+    border: none;
+}
+
+#overskrift {
+    font-size: 2.2em;
+}
+
+#selectKule {
+    margin: 20px auto;
+    padding: 0px;
+    width: 100%;
+}
+
+.tabell {
+    height: 450px;
+    overflow: auto;
 }

@@ -1,134 +1,139 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Feltskyting</title>
-		<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <head>
+      <title>Feltskyting</title>
+      <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="css/index.css">
+      <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/feltskyting.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/database.js"></script>
 
-		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/feltskyting.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/database.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/index.css">
+   </head>
+   <body>
+      <!-- ********* -->
+      <!-- HOVEDSIDE -->
+      <!-- ********* -->
+      <div data-role="page" data-fullscreen="true" id="hovedside" data-title="Feltskyting">
+         <div data-role="header" data-position="fixed" data-fullscreen="false">
+            <h1 id="overskrift">Feltskyting</h1>
+         </div>
+         <div role="main" data-role="ui-content" class="main-page">
+            <select id="selectVaapen" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)">
+               <!-- Empty -->
+            </select>
+            <div id="kuleinfo">
+               Sierra 144gr 6.5mm, 812 m/s
+            </div>
 
-	</head>
-	<body>
-		<!-- ********* -->
-		<!-- HOVEDSIDE -->
-		<!-- ********* -->
-		<div data-role="page" data-fullscreen="true" id="hovedside" data-title="Feltskyting">
-			<div data-role="header" data-position="fixed" data-fullscreen="false">
-				<h1 id="overskrift">Feltskyting</h1>
-			</div>
-			<div role="main" data-role="ui-content">
-				<select id="selectVaapen" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)">
-					<!-- Empty -->
-				</select>
-				<div id="kuleinfo">
-					Sierra 144gr 6.5mm, 812 m/s
-				</div>
+            <div data-scroll="true" class="tabell">
+               <ul data-role="listview" data-corners="false">
+                  <li> 100  -    0 </li>
+                  <li> 109  -    1 </li>
+                  <li> 119  -    2 </li>
+                  <li> 130  -    3 </li>
+                  <li> 141  -    4 </li>
+                  <li> 154  -    5 </li>
+                  <li> 178  -    6 </li>
+                  <li> 191  -    7 </li>
+                  <li> 209  -    8 </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+                  <li> xxx  -   xx </li>
+               </ul>
+            </div>
+         </div>
+         <div data-role="footer" data-position="fixed" data-fullscreen="false">
+            <div data-role="navbar">
+               <ul>
+                  <li><a href="#vaapenOppsett" class="ui-btn ui-btn-inline" data-transition="none">Tabell</a></li>
+                  <li><a href="weather.html" class="ui-btn ui-btn-inline" data-transition="none">Vær</a></li>
+               </ul>
+            </div>
+            <h1>Laget av Terje Hopsø</h1>
+         </div>
+      </div>
+      <!-- ************* -->
+      <!-- VAAPENOPPSETT -->
+      <!-- ************* -->
+      <div data-role="page" data-fullscreen="true" id="vaapenOppsett" data-title="Vaapenoppsett">
+         <div data-role="header" data-position="fixed" data-fullscreen="false">
+            <h1 id="overskrift">Våpenoppsett</h1>
+         </div>
+         <div role="main" date-role="ui-content" class="main-page">
+            <ul data-role="listview" data-scroll="true" id="vaapenList" data-icon="false">
+               <!-- li><a href="#vaapenEdit">Våpen 1</a></li>
+               <li><a href="#vaapenEdit">Våpen 2</a></li>
+               <li><a href="#vaapenEdit">Våpen 3</a></li>
+               <li><a href="#vaapenEdit">Våpen 4</a></li>
+               <li><a href="#vaapenEdit">Våpen 5</a></li>
+               <li><a href="#vaapenEdit">Våpen 6</a></li>
+               <li><a href="#vaapenEdit">Våpen 7</a></li>
+               <li><a href="#vaapenEdit">Våpen 8</a></li>
+               <li><a href="#vaapenEdit">Våpen 9</a></li>
+               <li><a href="#vaapenEdit">Våpen 10</a></li -->
+            </ul>
+            <select id="selectKule" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)">
+               <!-- Empty -->
+            </select>
+            
+            <a href="#hovedside" data-rel="back" data-role="button" data-transition="none">Try Again</a>
+            
+            <label for="basic">Text Input:</label>
+            <input type="text" name="name" id="basic" value="" />
+            <div data-role="button" onclick="sjekkBasic()">
+               Trykk meg
+            </div>
+         </div>
+         <div data-role="footer" data-position="fixed" data-fullscreen="false">
+            <h1>Laget av Terje Hopsø</h1>
+         </div>
+      </div>
 
-				<div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
-					<ul data-role="listview" data-corners="false">
-						<li> 100  -    0 </li>
-						<li> 109  -    1 </li>
-						<li> 119  -    2 </li>
-						<li> 130  -    3 </li>
-						<li> 141  -    4 </li>
-						<li> 154  -    5 </li>
-						<li> 178  -    6 </li>
-						<li> 191  -    7 </li>
-						<li> 209  -    8 </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-						<li> xxx  -   xx </li>
-					</ul>
-				</div>
-			</div>
-			<div data-role="footer" data-position="fixed" data-fullscreen="false">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#vaapenOppsett" class="ui-btn ui-btn-inline" data-transition="none">Tabell</a></li>
-						<li><a href="weather.html" class="ui-btn ui-btn-inline" data-transition="none">Vær</a></li>
-					</ul>
-				</div>
-				<h1>Laget av Terje Hopsø</h1>
-			</div>
-		</div>
-		<!-- ************* -->
-		<!-- VAAPENOPPSETT -->
-		<!-- ************* -->
-		<div data-role="page" data-fullscreen="true" id="vaapenOppsett" data-title="Vaapenoppsett">
-			<div data-role="header" data-position="fixed" data-fullscreen="false">
-				<h1 id="overskrift">Våpenoppsett</h1>
-			</div>
-			<div role="main" date-role="ui-content">
-				<ul data-role="listview" data-scroll="true" id="vaapenList" date-theme="a">
-					<li><a href="tull.html" id="overskrift">Våpen 1</a></li>
-					<li><a href="tull.html" id="overskrift">Våpen 2</a></li>
-					<li><a href="tull.html" id="overskrift">Våpen 3</a></li>
-					<li><a href="tull.html" id="overskrift">Våpen 4</a></li>
-					<li><a href="tull.html" id="overskrift">Våpen 5</a></li>
-					<li><a href="tull.html" id="overskrift">Våpen 6</a></li>
-				</ul>
-				<select id="selectKule" style="margin-top: 50px;" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)">
-					<!-- Empty -->
-				</select>
-				<a href="#hovedside" data-rel="back" data-role="button" data-transition="none">Try Again</a>
-				<label for="basic">Text Input:</label>
-				<input type="text" name="name" id="basic" value="" />
-				<div data-role="button" onclick="sjekkBasic()">
-					Trykk meg
-				</div>
-			</div>
-			<div data-role="footer" data-position="fixed" data-fullscreen="false">
-				<h1>Laget av Terje Hopsø</h1>
-			</div>
-		</div>
-
-		<!-- ********** -->
-		<!-- VAAPEN     -->
-		<!-- ********** -->
-		<div date-role="page" data-fullscreen="true" id="vaapenEdit" data-title="Vaapen">
-			<div data-role="header" data-position="fixed" data-fullscreen="false">
-				<h1 id="overskrift">Våpen</h1>
-			</div>
-			<div role="main" data-role="ui-content">
-				<div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
-					<ul data-role="listview" data-corners="false">
-						<li> Linje1 </li>
-						<li> Linje2 </li>
-						<li> Linje3 </li>
-					</ul>
-				</div>
-			</div>
-			<div data-role="footer" data-position="fixed" data-fullscreen="false">
-				<h1>Laget av Terje Hopsø</h1>
-			</div>
-		</div>
-	</body>
+      <!-- ********** -->
+      <!-- VAAPEN     -->
+      <!-- ********** -->
+      <div date-role="page" data-fullscreen="true" id="vaapenEdit" data-title="Vaapen">
+         <div data-role="header" data-position="fixed" data-fullscreen="false">
+            <h1 id="overskrift">Våpen</h1>
+         </div>
+         <div role="main" data-role="ui-content">
+            <div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
+               <ul data-role="listview" data-corners="false">
+                  <li> Linje1 </li>
+                  <li> Linje2 </li>
+                  <li> Linje3 </li>
+               </ul>
+            </div>
+         </div>
+         <div data-role="footer" data-position="fixed" data-fullscreen="false">
+            <h1>Laget av Terje Hopsø</h1>
+         </div>
+      </div>
+   </body>
 </html>
