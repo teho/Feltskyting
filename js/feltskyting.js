@@ -7,6 +7,7 @@
 
 var db;
 var isVaapenOppsettLoaded = false;
+// var vaapenListActiveItem = -1;
 
 console.log("\n\n\n************** Starting application **************");
 
@@ -82,8 +83,8 @@ function oppdaterListe(tx, res, selId) {
 		selId.append($("<option />").val(rec.id).text(rec.navn));
 	};
 
-	// Sett fokus på første element og oppdater skjerm
-	selId.prop('selectedIndex', 1).selectmenu('refresh');
+	// Sett fokus på første element (index 0 er første) og oppdater skjerm
+	selId.prop('selectedIndex', 0).selectmenu('refresh');
 }
 
 //  ********************************************
@@ -171,7 +172,10 @@ $(function() {
 	//  *********************************************
     $("#vaapenList li").click(function() {
         console.log("vaapenListClick event");
-        console.log($(this).find("a").text());
+            $("#vaapenList li").removeClass('ui-btn-icon-right ui-icon-check');     // Remove active icon, removes for all items
+        $(this).addClass('ui-btn-icon-right ui-icon-check');
+        activeVaapen = $(this).find("a").text();
+		console.log($("#selectVaapen option:selected").text());                // The value of the selected value in selectVaapen
     });
 });
 
