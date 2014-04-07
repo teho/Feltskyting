@@ -9,16 +9,20 @@ var db;
 var isVaapenOppsettLoaded = false;
 // var vaapenListActiveItem = -1;
 
-console.log("\n\n\n************** Starting application **************");
+function log(text) {
+   console.log(text);
+}
+
+log("\n\n\n************** Starting application **************");
 
 //  ********************************************
-// Wait for device API libraries to load
-// 	********************************************
+//  Wait for device API libraries to load
+//  ********************************************
 document.addEventListener("deviceready", onDeviceReady, false);
 
 //  ********************************************
-// onDeviceReady - Device is ready for use
-// 	********************************************
+//  onDeviceReady - Device is ready for use
+//  ********************************************
 function onDeviceReady() {
    console.log("onDevice called");
    try {
@@ -35,20 +39,7 @@ window.onBeforeUnload = function() {
 };
 window.onUnload = function() {
    console.log("window.onUnload");
-   // navigator.app.exitApp();
 };
-
-// document.addEventListener("menubutton", function () {
-// console.log('Menu button');
-// }, false);
-//
-// document.addEventListener("searchbutton", function () {
-// console.log('Search button');
-// }, false);
-//
-// document.addEventListener("backbutton", function () {
-// console.log('Back button');
-// }, false);
 
 document.addEventListener("resume", onResume, false);
 function onResume() {
@@ -65,8 +56,6 @@ function onPause() {
 // 	********************************************
 function parameterEndring(obj) {
    console.log("parameterEndring");
-   console.log(obj);
-   // console.log(obj.options[obj.selectedIndex].value);
    console.log(obj.options[obj.selectedIndex].innerHTML);
 }
 
@@ -101,13 +90,12 @@ function oppdaterListView(tx, res, selId) {
          "href" : "#",
          "text" : rec.navn
       })));
-      // selId.append("<li><a href='test.html'>Våpentest 99</a></li>");
    };
 }
 
 //  ********************************************
 //  Initier Liste
-// 	********************************************
+//  ********************************************
 function initierListe(tx, tbl, selId, fOppdater) {
    console.log("initierListe: " + tbl);
    tx.executeSql('SELECT id, navn FROM ' + tbl + " order by navn", [], function(tx, res) {
@@ -117,7 +105,7 @@ function initierListe(tx, tbl, selId, fOppdater) {
 
 //  ********************************************
 //  Initier DropDown
-// 	********************************************
+//  ********************************************
 function initierDropDown(tbl, selId) {
    // Fyll inn dropdown
    db.transaction(function(tx) {
@@ -127,7 +115,7 @@ function initierDropDown(tbl, selId) {
 
 //  ********************************************
 //  Initier ListView
-// 	********************************************
+//  ********************************************
 function initierListView(tbl, selId) {
    // Fyll inn listView
    db.transaction(function(tx) {
@@ -137,7 +125,7 @@ function initierListView(tbl, selId) {
 
 //  ********************************************
 //  Initier Objects (dropdowns, listview, etc.)
-// 	********************************************
+//  ********************************************
 function initierDropDowns() {
    console.log("initierDropDowns");
    // Fyll inn dropdown for våpen
@@ -148,7 +136,7 @@ function initierDropDowns() {
 
 //  ********************************************
 //  Populate the database
-// 	********************************************
+//  ********************************************
 function initierDatabase(tx) {
    console.log("initierDatabase");
    initierTabellSikte(tx);
@@ -165,84 +153,60 @@ function DbErrorHandler(err) {
    console.log("Error processing SQL: " + err.message);
 }
 
-//  ********************************************
-//  Eventhandlers for enter/leave pages
-//  ********************************************
 $(function() {
+   //  ********************************************
+   //  hovedside event handlers
+   //  ********************************************
+   $('#hovedside').on('pagebeforeshow', function() {
+      log("hovedside: pagebeforeshow");
+   });
+   //  ********************************************
+   //  vaapenOppsett event handlers
+   //  ********************************************
    $('#vaapenOppsett').on('pagebeforeshow', function() {
-      console.log("vaapenOppsett: pagebeforeshow triggered");
+      console.log("vaapenOppsett: pagebeforeshow");
       if (!isVaapenOppsettLoaded) {
          initierDropDown("KULE", $("#selectKule"));
          isVaapenOppsettLoaded = true;
          console.log("\tloaded KULE");
-
       }
-      // console.log($("#selectVaapen").html());
    });
    $('#vaapenOppsett').on('pagebeforehide', function() {
-      console.log("vaapenOppsett: pagebeforehide triggered");
-      // $("#vaapenList").listview("refresh");               // DEBUG
-      // console.log(" ***************************");
-      // console.log($("#vaapenList").html());
-      // console.log(" ***************************");
-      // $('#selectKule').find('option').remove().end();
-      // $('#selectKule').selectmenu('refresh');
-      // isVaapenOppsettLoaded = false;
-      // $( "#vaapenEdit" ).css( "visibility", "visible" );
+      console.log("vaapenOppsett: pagebeforehide");
    });
-   //  *********************************************
    //  Tap and Hold
-   //  *********************************************
    $("#selectVaapen-button").bind('taphold', function(event) {
       console.log("tapholdHandler");
       $.mobile.changePage("#vaapenOppsett", {
          transition : "none"
       });
    });
-   //  *********************************************
    //  vaapenListClick
-   //  *********************************************
-   // $("#vaapenList").delegate('li', 'click', function() {
-      // console.log("vaapenList delegate event");
-      // $("#vaapenList li").removeClass('ui-btn-icon-right ui-icon-check');
-      // // Remove active icon, removes for all items
-      // $(this).addClass('ui-btn-icon-right ui-icon-check');
-      // activeVaapen = $(this).find("a").text();
-      // console.log($("#selectVaapen option:selected").text());
-      // // The value of the selected value in selectVaapen
-      // console.log(activeVaapen);
-   // });
-
-   // $(document).on('click', "#vaapenList li", function() {
-      // console.log("Newest 1 !!!");
-   // });
    $(document).on('click', "#vaapenList li a", function() {
       console.log("#vaapenList li a : click event");
+      // Remove icon and background from active selection
+      $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+      // Add icon and background for new active selection
+      $(this).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
       activeVaapen = $(this).text();
-      console.log(activeVaapen);
-   });
-   // $(document).on('click', "#vaapenList", function() {
-      // console.log("Newest 3 !!!");
-   // });
-   // $(document).on('click', "#vaapenList li", function(e) {
-      // console.log("Newest 1e !!!");
-   // });
-   // $(document).on('click', "#vaapenList li a", function(e) {
-      // console.log("Newest 2e !!!");
-   // });
-   // $(document).on('click', "#vaapenList", function(e) {
-      // console.log("Newest 3e !!!");
-   // });
-   // $("#vaapenList li").on('click', function() {
-      // console.log("vaapenList click event");
-      // $("#vaapenList li").removeClass('ui-btn-icon-right ui-icon-check');
-      // // Remove active icon, removes for all items
-      // $(this).addClass('ui-btn-icon-right ui-icon-check');
-      // activeVaapen = $(this).find("a").text();
-      // console.log($("#selectVaapen option:selected").text());
-      // // The value of the selected value in selectVaapen
       // console.log(activeVaapen);
-   // });
+   });
+   //  ********************************************
+   //  vaapenEdit event handlers
+   //  ********************************************
+   $('#vaapenEdit').on('pagebeforeshow', function() {
+      log("vaapenEdit: pagebeforeshow");
+   });
+   $('#vaapenEdit').on('pagebeforehide', function() {
+      log("vaapenEdit: pagebeforehide");
+   });
+   //  Tap and Hold
+   $("#vaapenList").bind('taphold', function(event) {
+      console.log("tapholdHandler");
+      $.mobile.changePage("#vaapenEdit", {
+         transition : "slide"
+      });
+   });
 });
 
 //  ********************************************
