@@ -7,7 +7,6 @@
 
 var db;
 var isVaapenOppsettLoaded = false;
-// var vaapenListActiveItem = -1;
 
 function log(text) {
    console.log(text);
@@ -159,6 +158,9 @@ $(function() {
    //  ********************************************
    $('#hovedside').on('pagebeforeshow', function() {
       log("hovedside: pagebeforeshow");
+   });
+   $('#hovedside').on('pagebeforehide', function() {
+      log("hovedside: pagebeforehide");
    });
    //  ********************************************
    //  vaapenOppsett event handlers
