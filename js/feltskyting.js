@@ -170,12 +170,27 @@ $(function() {
       if (!isVaapenOppsettLoaded) {
          initierDropDown("KULE", $("#selectKule"));
          isVaapenOppsettLoaded = true;
-         console.log("\tloaded KULE");
       }
+      // start ----------------------------------- finn valgt våpen
+      console.log("Forsøk å finne valgte våpen fra hovedside");
+      console.log($( "#selectVaapen option:selected" ).text());
+      // console.log($("#selectVaapen").html());
+      var exists = false;
+      $('#selectVaapen option').each(function() {
+         if (this.text == $( "#selectVaapen option:selected" ).text()) {
+            console.log("Yes!!!  Vi fant den.");
+            console.log(this.text);
+            console.log(this.value);
+            exists = true;
+            return false;
+         }
+      });
+      // ferdig ----------------------------------- finn valgt våpen
    });
    $('#vaapenOppsett').on('pagebeforehide', function() {
       console.log("vaapenOppsett: pagebeforehide");
    });
+
    //  Tap and Hold
    $("#selectVaapen-button").bind('taphold', function(event) {
       console.log("tapholdHandler");
@@ -183,6 +198,7 @@ $(function() {
          transition : "none"
       });
    });
+
    //  vaapenListClick
    $(document).on('click', "#vaapenList li a", function() {
       console.log("#vaapenList li a : click event");
@@ -191,7 +207,6 @@ $(function() {
       // Add icon and background for new active selection
       $(this).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
       activeVaapen = $(this).text();
-      // console.log(activeVaapen);
    });
    //  ********************************************
    //  vaapenEdit event handlers
