@@ -185,7 +185,7 @@ $(function() {
       console.log($("#selectVaapen option:selected").text());
       // console.log($("#selectVaapen").html());
       var exists = false;
-      $('#selectVaapen option').each(function() {
+      $('#vaapenList li a').each(function() {
          if (this.text == $("#selectVaapen option:selected").text()) {
             console.log("Yes!!!  Vi fant den.");
             console.log(this.text);
