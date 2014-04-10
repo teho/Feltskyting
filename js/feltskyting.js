@@ -152,6 +152,15 @@ function DbErrorHandler(err) {
    console.log("Error processing SQL: " + err.message);
 }
 
+// ***************************************
+// Set Active element in list
+// ***************************************
+function vo_setActiveElement(lv, elem) {
+   console.log("vo_setActiveElement called");
+   $(lv).removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+   $(elem).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+}
+
 $(function() {
    //  ********************************************
    //  hovedside event handlers
@@ -173,15 +182,16 @@ $(function() {
       }
       // start ----------------------------------- finn valgt våpen
       console.log("Forsøk å finne valgte våpen fra hovedside");
-      console.log($( "#selectVaapen option:selected" ).text());
+      console.log($("#selectVaapen option:selected").text());
       // console.log($("#selectVaapen").html());
       var exists = false;
       $('#selectVaapen option').each(function() {
-         if (this.text == $( "#selectVaapen option:selected" ).text()) {
+         if (this.text == $("#selectVaapen option:selected").text()) {
             console.log("Yes!!!  Vi fant den.");
             console.log(this.text);
             console.log(this.value);
             exists = true;
+            vo_setActiveElement("#vaapenList li a", this);
             return false;
          }
       });
@@ -202,10 +212,11 @@ $(function() {
    //  vaapenListClick
    $(document).on('click', "#vaapenList li a", function() {
       console.log("#vaapenList li a : click event");
+      vo_setActiveElement("#vaapenList li a", this);
       // Remove icon and background from active selection
-      $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+      // $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
       // Add icon and background for new active selection
-      $(this).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+      // $(this).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
       activeVaapen = $(this).text();
    });
    //  ********************************************
