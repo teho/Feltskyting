@@ -163,6 +163,7 @@ $(function() {
    });
    $('#hovedside').on('pageshow', function() {
       log("hovedside: pageshow");
+      $("#selectVaapen").prop('selectedIndex', vaapenSelectedId).selectmenu('refresh');
    });
    $('#hovedside').on('pagebeforehide', function() {
       log("hovedside: pagebeforehide");
