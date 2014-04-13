@@ -7,6 +7,8 @@
 
 var db;
 var isVaapenOppsettLoaded = false;
+var vaapenSelectedId;
+// Har id for valgte våpen i listene
 
 function log(text) {
    console.log(text);
@@ -152,15 +154,6 @@ function DbErrorHandler(err) {
    console.log("Error processing SQL: " + err.message);
 }
 
-// ***************************************
-// Set Active element in list
-// ***************************************
-function vo_setActiveElement(lv, elem) {
-   console.log("vo_setActiveElement called");
-   $(lv).removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
-   $(elem).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
-}
-
 $(function() {
    //  ********************************************
    //  hovedside event handlers
@@ -168,56 +161,52 @@ $(function() {
    $('#hovedside').on('pagebeforeshow', function() {
       log("hovedside: pagebeforeshow");
    });
+   $('#hovedside').on('pageshow', function() {
+      log("hovedside: pageshow");
+   });
    $('#hovedside').on('pagebeforehide', function() {
       log("hovedside: pagebeforehide");
+      vaapenSelectedId = $("#selectVaapen option:selected").closest("option").index();
    });
    //  ********************************************
    //  vaapenOppsett event handlers
    //  ********************************************
+
+   // #############  vaapenOppsett.pagebeforeshow ##################
    $('#vaapenOppsett').on('pagebeforeshow', function() {
       console.log("vaapenOppsett: pagebeforeshow");
       if (!isVaapenOppsettLoaded) {
          initierDropDown("KULE", $("#selectKule"));
          isVaapenOppsettLoaded = true;
       }
-      // start ----------------------------------- finn valgt våpen
-      console.log("Forsøk å finne valgte våpen fra hovedside");
-      console.log($("#selectVaapen option:selected").text());
-      // console.log($("#selectVaapen").html());
-      var exists = false;
-      $('#vaapenList li a').each(function() {
-         if (this.text == $("#selectVaapen option:selected").text()) {
-            console.log("Yes!!!  Vi fant den.");
-            console.log(this.text);
-            console.log(this.value);
-            exists = true;
-            vo_setActiveElement("#vaapenList li a", this);
-            return false;
-         }
-      });
-      // ferdig ----------------------------------- finn valgt våpen
-   });
-   $('#vaapenOppsett').on('pagebeforehide', function() {
-      console.log("vaapenOppsett: pagebeforehide");
    });
 
-   //  Tap and Hold
+   // #############  vaapenOppsett.pageshow ##################
+   $('#vaapenOppsett').on('pageshow', function() {
+      log("vaapenOppsett.pageshow");
+      vo_setActiveElement("#vaapenList li a:eq(" + vaapenSelectedId + ")");
+      $("#vaapenList").scrollTop($("#vaapenList li:eq(" + vaapenSelectedId + ")").position().top - $("#vaapenList li:eq(0)").position().top);
+   });
+
+   // #############  vaapenOppsett.pagebeforehide ##################
+   $('#vaapenOppsett').on('pagebeforehide', function() {
+      log("vaapenOppsett: pagebeforehide");
+   });
+
+   // #############  selectVaapen.taphold ##################
    $("#selectVaapen-button").bind('taphold', function(event) {
-      console.log("tapholdHandler");
+      log("tapholdHandler");
       $.mobile.changePage("#vaapenOppsett", {
          transition : "none"
       });
    });
 
-   //  vaapenListClick
+   // #############  vaapenList.click ##################
    $(document).on('click', "#vaapenList li a", function() {
-      console.log("#vaapenList li a : click event");
-      vo_setActiveElement("#vaapenList li a", this);
-      // Remove icon and background from active selection
-      // $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
-      // Add icon and background for new active selection
-      // $(this).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
-      activeVaapen = $(this).text();
+      log("#vaapenList li a : click event");
+      //      vo_setActiveElement("#vaapenList li a", this);
+      vo_setActiveElement(this);
+      vaapenSelectedId = $(this).closest("li").index();
    });
    //  ********************************************
    //  vaapenEdit event handlers
@@ -228,14 +217,28 @@ $(function() {
    $('#vaapenEdit').on('pagebeforehide', function() {
       log("vaapenEdit: pagebeforehide");
    });
-   //  Tap and Hold
-   $("#vaapenList").bind('taphold', function(event) {
-      console.log("tapholdHandler");
-      $.mobile.changePage("#vaapenEdit", {
-         transition : "slide"
-      });
-   });
+   // //  Tap and Hold
+   // $("#vaapenList").bind('taphold', function(event) {
+   // console.log("tapholdHandler");
+   // $.mobile.changePage("#vaapenEdit", {
+   // transition : "slide"
+   // });
+   // });
 });
+
+// ###########################################################################
+//                                  VAAPENOPPSETT FUNCTIONS
+// ###########################################################################
+
+// ***************************************
+// Set Active element in list
+// ***************************************
+//function vo_setActiveElement(lv, elem) {
+function vo_setActiveElement(elem) {
+   log("vo_setActiveElement called");
+   $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+   $(elem).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+}
 
 //  ********************************************
 //  TESTING
@@ -244,7 +247,7 @@ function sjekkBasic() {
    console.log("sjekkBasic");
    //get
    var bla = $('#basic').val();
-   console.log("Value entered: " + bla);
+   log("Value entered: " + bla);
    //set
    $('#basic').val('Skriv inn ny tekst');
 }
