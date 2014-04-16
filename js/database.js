@@ -130,7 +130,7 @@ function te(tx, name, ok, feil) {
    try {
       tx.executeSql("SELECT count(*) ant FROM sqlite_master WHERE type='table' and name='" + name + "';", undefined, function(tx, res) {
          if (res.rows.item(0).ant == 1)
-            ok()
+            ok();
          else
             feil();
       });
