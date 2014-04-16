@@ -140,18 +140,11 @@ function initierDropDowns() {
 //  ********************************************
 function initierDatabase(tx) {
    console.log("initierDatabase");
+   // dropAllTables(tx);
    initierTabellSikte(tx);
    initierTabellKule(tx);
    initierTabellVaapen(tx);
    // initierTabellSisteBruk(tx);
-}
-
-//  ********************************************
-//  Transaction error callback
-//  ********************************************
-function DbErrorHandler(err) {
-   console.log("DbErrorHandler");
-   console.log("Error processing SQL: " + err.message);
 }
 
 $(function() {
