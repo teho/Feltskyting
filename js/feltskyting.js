@@ -8,7 +8,11 @@
 var db;
 var isVaapenOppsettLoaded = false;
 var vaapenSelectedId;
-// Har id for valgte våpen i listene
+
+var currentRecord = {
+   vaapenId : null,
+   vaapenName : null
+};
 
 function log(text) {
    console.log(text);
@@ -99,7 +103,7 @@ function oppdaterListView(tx, res, selId) {
 //  ********************************************
 function initierListe(tx, tbl, selId, fOppdater) {
    console.log("initierListe: " + tbl);
-   tx.executeSql('SELECT id, navn FROM ' + tbl + " order by navn", [], function(tx, res) {
+   tx.executeSql('select id, navn from ' + tbl + " order by navn", [], function(tx, res) {
       fOppdater(tx, res, selId);
    }, DbErrorHandler);
 }
@@ -130,8 +134,8 @@ function initierListView(tbl, selId) {
 function initierDropDowns() {
    console.log("initierDropDowns");
    // Fyll inn dropdown for våpen
-   initierDropDown("VAAPEN", $("#selectVaapen"));
-   initierListView("VAAPEN", $("#vaapenList"));
+   initierDropDown("vaapen", $("#selectVaapen"));
+   initierListView("vaapen", $("#vaapenList"));
 
 }
 
@@ -144,7 +148,8 @@ function initierDatabase(tx) {
    initierTabellSikte(tx);
    initierTabellKule(tx);
    initierTabellVaapen(tx);
-   // initierTabellSisteBruk(tx);
+   initierTabellcurrentRecord(tx);
+   getCurrentRecord(tx);
 }
 
 $(function() {
@@ -170,7 +175,7 @@ $(function() {
    $('#vaapenOppsett').on('pagebeforeshow', function() {
       console.log("vaapenOppsett: pagebeforeshow");
       if (!isVaapenOppsettLoaded) {
-         initierDropDown("KULE", $("#selectKule"));
+         initierDropDown("kule", $("#selectKule"));
          isVaapenOppsettLoaded = true;
       }
    });

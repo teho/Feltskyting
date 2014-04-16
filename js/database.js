@@ -8,19 +8,14 @@
 //  Opprett og initier tabell Sikter
 //  ********************************************
 function initierTabellSikte(tx) {
-   console.log("initierTabellSikte");
+   log("initierTabellSikte");
    try {
-      tableExists(tx, "SIKTE", function() {
-         log("Opprett tabell SIKTE");
-         tx.executeSql('CREATE TABLE IF NOT EXISTS SIKTE (id unique, navn, gjenge, antKnepp)', undefined, function() {
-            console.log("Create table sikte success ...");
-         }, function() {
-            console.log("Create table sikte failed ... ");
-         });
-         tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (1, "Busk Standard", 1.0, 12)');
-         tx.executeSql('INSERT INTO SIKTE (id, navn, gjenge, antKnepp) VALUES (2, "Busk Finknepp", 1.0, 24)');
+      tableExists(tx, "sikte", function() {
+         tx.executeSql('create table if not exists sikte (id unique, navn, gjenge, antKnepp)');
+         tx.executeSql('insert into sikte (id, navn, gjenge, antKnepp) values (1, "Busk Standard", 1.0, 12)');
+         tx.executeSql('insert into sikte (id, navn, gjenge, antKnepp) values (2, "Busk Finknepp", 1.0, 24)');
       }, function() {
-         log("Table SIKTE found");
+         return;
       });
    } catch(err) {
       alert("initierTabellSikte: " + err.message);
@@ -31,16 +26,16 @@ function initierTabellSikte(tx) {
 //  Opprett og initier tabell Kuler
 //  ********************************************
 function initierTabellKule(tx) {
-   console.log("initierTabellKule");
+   log("initierTabellKule");
    try {
-      tableExists(tx, "KULE", function() {
-         tx.executeSql('CREATE TABLE IF NOT EXISTS KULE (id unique, navn, balC)');
-         tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (1, "Lapua 108gr 6.6mm", .60)');
-         tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (2, "Sierra 109gr 6.5mm", .61)');
-         tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (3, "Sierra 123gr 6.5mm", .62)');
-         tx.executeSql('INSERT INTO KULE (id, navn, balC) VALUES (4, "Sierra 144gr 6.5mm", .63)');
+      tableExists(tx, "kule", function() {
+         tx.executeSql('create table if not exists kule (id unique, navn, balC)');
+         tx.executeSql('insert into kule (id, navn, balC) values (1, "Lapua 108gr 6.6mm", .60)');
+         tx.executeSql('insert into kule (id, navn, balC) values (2, "Sierra 109gr 6.5mm", .61)');
+         tx.executeSql('insert into kule (id, navn, balC) values (3, "Sierra 123gr 6.5mm", .62)');
+         tx.executeSql('insert into kule (id, navn, balC) values (4, "Sierra 144gr 6.5mm", .63)');
       }, function() {
-         log("Table KULE found");
+         return;
       });
    } catch (err) {
       alert("initierTabellKule: " + err.message);
@@ -51,24 +46,41 @@ function initierTabellKule(tx) {
 //  Opprett og initier tabell Vaapen
 //  ********************************************
 function initierTabellVaapen(tx) {
-   console.log("initierTabellVaapen");
+   log("initierTabellVaapen");
    try {
-      tableExists(tx, "VAAPEN", function() {
-         tx.executeSql('CREATE TABLE IF NOT EXISTS VAAPEN (id unique, navn, kuleId, sikteId)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (1, "Terje FeltSauer", 2, 1)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (2, "Terje BaneSauer", 1, 1)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (3, "Stian Sauer", 2, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (4, "Våpen 4 Sauer", 3, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (5, "Våpen 5 Sauer", 3, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (6, "Våpen 6 Sauer", 3, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (7, "Våpen 7 Sauer", 3, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (8, "Våpen 8 Sauer", 3, 2)');
-         tx.executeSql('INSERT INTO VAAPEN (id, navn, kuleId, sikteId) VALUES (9, "Våpen 9 Sauer", 3, 2)');
+      tableExists(tx, "vaapen", function() {
+         tx.executeSql('create table if not exists vaapen (id unique, navn, kuleId, sikteId)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (1, "FeltSauer", 2, 1)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (2, "BaneSauer", 1, 1)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (3, "Stian Sauer", 2, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (4, "Våpen 4 Sauer", 3, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (5, "Våpen 5 Sauer", 3, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (6, "Våpen 6 Sauer", 3, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (7, "Våpen 7 Sauer", 3, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (8, "Våpen 8 Sauer", 3, 2)');
+         tx.executeSql('insert into vaapen (id, navn, kuleId, sikteId) values (9, "Våpen 9 Sauer", 3, 2)');
       }, function() {
-         log("Table VAAPEN found");
+         return;
       });
    } catch (err) {
       alert("initierTabellVaapen: " + err.message);
+   }
+}
+
+// **********************************************
+// Init last table for last used data
+// **********************************************
+function initierTabellcurrentRecord(tx) {
+   log("initierTabellcurrentRecord");
+   try {
+      tableExists(tx, "currentRecord", function() {
+         tx.executeSql('create table currentRecord (vaapenId, vaapenName)');
+         tx.executeSql('insert into currentRecord (vaapenId, vaapenName) values (1, "FeltSauer")');
+      }, function() {
+         return;
+      });
+   } catch (err) {
+      alert("initierTabellcurrentRecord" + err.message);
    }
 }
 
@@ -78,14 +90,45 @@ function initierTabellVaapen(tx) {
 function dropAllTables(tx) {
    console.log("dropAllTables");
    try {
-      tx.executeSql('DROP TABLE IF EXISTS SIKTE');
-      tx.executeSql('DROP TABLE IF EXISTS KULE');
-      tx.executeSql('DROP TABLE IF EXISTS VAAPEN');
+      tx.executeSql('drop table if exists sikte');
+      tx.executeSql('drop table if exists kule');
+      tx.executeSql('drop table if exists vaapen');
+      tx.executeSql('drop table if exists currentRecord');
    } catch(err) {
       alert("dropAllTables: " + err);
    }
 }
 
+// **********************************************
+// Get current record
+// **********************************************
+function getCurrentRecord(tx) {
+   try {
+      tx.executeSql('select * from currentRecord;', undefined, function(tx, res) {
+         currentRecord.vaapenId = res.rows.item(0).vaapenId;
+         currentRecord.vaapenName = res.rows.item(0).vaapenName;
+         log(currentRecord.vaapenId);
+         log(currentRecord.vaapenName);
+      });
+   } catch(err) {
+      alert("getCurrentRecord: " + err.message);
+   }
+}
+// **********************************************
+// Update current record
+// **********************************************
+function updateCurrentrecord() {
+   try {
+      tx.executeSql('delete from currentRecord;');
+      tx.executeSql('insert into currentRecord (vaapenId, vaapenName) values (?, ?);', currentRecord.vaapenId, currentRecord.vaapenName);
+   } catch(err) {
+      alert("updateCurrentRecord: " + err.message);
+   }
+}
+
+// **********************************************
+// Error
+// **********************************************
 function error(transaction, err) {
    alert("DB error : " + err.message);
    return false;
@@ -110,31 +153,4 @@ function tableExists(tx, name, missingTable, foundTable) {
 function DbErrorHandler(err) {
    console.log("DbErrorHandler");
    console.log("Error processing SQL: " + err.message);
-}
-
-function testing(tx) {
-   log("line1");
-   te(tx, "SIKTE", function() {
-      return;
-   }, function() {
-      log("te: feil");
-   });
-}
-
-function t1() {
-   log("line2");
-}
-
-function te(tx, name, ok, feil) {
-   log("te");
-   try {
-      tx.executeSql("SELECT count(*) ant FROM sqlite_master WHERE type='table' and name='" + name + "';", undefined, function(tx, res) {
-         if (res.rows.item(0).ant == 1)
-            ok();
-         else
-            feil();
-      });
-   } catch(err) {
-      alert("tableExists error: " + err);
-   }
 }
