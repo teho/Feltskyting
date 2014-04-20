@@ -27,9 +27,10 @@
             <h1>Feltskyting</h1>
          </div>
          <div role="main" data-role="ui-content" class="main-page">
-            <select id="selectVaapen" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)">
+            <select id="selectVaapen" data-native-menu="false" data-icon="false">
                <!-- Empty -->
             </select>
+            <div id="result"></div>
             <div id="kuleinfo">
                Sierra 144gr 6.5mm, 812 m/s
             </div>
@@ -75,6 +76,7 @@
          <div data-role="footer" data-position="fixed" data-fullscreen="false" id="footer">
             <div data-role="navbar">
                <ul>
+                  <li><a href="#vaapenOppsett" data-transition="none">Våpen</a></li>
                   <li><a href="#vaapenOppsett" data-transition="none">Tabell</a></li>
                   <li><a href="weather.html" class="ui-btn ui-btn-inline" data-transition="none">Vær</a></li>
                </ul>
@@ -92,7 +94,7 @@
          <div role="main" date-role="ui-content" class="main-page">
             <ul data-role="listview" data-scroll="true" id="vaapenList" data-icon="false">
             </ul>
-            <select id="selectKule" data-native-menu="false" data-icon="false" onchange="parameterEndring(this)"></select>
+            <select id="selectKule" data-native-menu="false" data-icon="false"></select>
 
             <label for="basic">Text Input:</label>
             <input type="text" name="name" id="basic" value="" />

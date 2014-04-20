@@ -14,15 +14,11 @@ var currentRecord = {
    vaapenName : null
 };
 
-function log(text) {
-   console.log(text);
-}
+console.log("\n\n\n************** Starting application **************");
 
-log("\n\n\n************** Starting application **************");
-
-//  ********************************************
-//  Wait for device API libraries to load
-//  ********************************************
+//  =========================================
+//  = Wait for device API libraries to load =
+//  =========================================
 document.addEventListener("deviceready", onDeviceReady, false);
 
 //  ********************************************
@@ -36,81 +32,106 @@ function onDeviceReady() {
       alert(err);
    }
    // Skal fjernes senere. Skal være brukerstyrt
-   db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
+   // db.transaction(initierDatabase, DbErrorHandler, initierDropDowns);
+   /*
+    * Initier dropdowns og hent sist brukte våpen
+    */
+   initierDropDowns();
+   // getCurrentRecord();
 }
 
+//  =================
+//  = WINDOW EVENTS =
+//  =================
+
+//  ==================
+//  = onBeforeUnload =
+//  ==================
 window.onBeforeUnload = function() {
    console.log("window.onBeforeUnload");
 };
+
+//  ============
+//  = onUnload =
+//  ============
 window.onUnload = function() {
    console.log("window.onUnload");
 };
 
+//  ====================
+//  = addEventListener =
+//  ====================
 document.addEventListener("resume", onResume, false);
 function onResume() {
    console.log("Resume event");
 };
 
+//  =========
+//  = pause =
+//  =========
 document.addEventListener("pause", onPause, false);
 function onPause() {
    console.log("Pause event");
+   // updateCurrentRecord();
 };
 
-//  ********************************************
-//  Parameter endret
-// 	********************************************
-function parameterEndring(obj) {
-   console.log("parameterEndring");
-   console.log(obj.options[obj.selectedIndex].innerHTML);
-}
+//  ====================
+//  = Parameter endret =
+//  ====================
+// function parameterEndring(obj) {
+   // console.log("parameterEndring");
+   // console.log(obj.options[obj.selectedIndex].innerHTML);
+// }
 
-//  ********************************************
-//  Oppdater Dropdown fra resultatsett
-// 	********************************************
+//  ======================================
+//  = Oppdater Dropdown fra resultatsett =
+//  ======================================
 function oppdaterSelect(tx, res, selId) {
-   console.log("oppdaterSelect");
    var rec, i;
-
-   // Løp gjennom resultatene og fyll opp listen
+   /*
+    * Løp gjennom resultatene og legg til elementer til dropdown
+    */
    for ( i = 0; i < res.rows.length; i++) {
       rec = res.rows.item(i);
-      selId.append($("<option />").val(rec.id).text(rec.navn));
+      $(selId).append($("<option />").val(rec.id).text(rec.navn));
    };
-
-   // Sett fokus på første element (index 0 er første) og oppdater skjerm
-   selId.prop('selectedIndex', 0).selectmenu('refresh');
+   /*
+    * Sett fokus på første element (index 0 er første) og oppdater skjerm
+    */
+   $(selId).prop('selectedIndex', 0).selectmenu('refresh');
 }
 
-//  ********************************************
-//  Oppdater ListView fra resultatsett
-// 	********************************************
+//  ======================================
+//  = Oppdater ListView fra resultatsett =
+//  ======================================
 function oppdaterListView(tx, res, selId) {
    console.log("oppdaterListView");
    var rec, i;
-
-   // Løp gjennom resultatene og fyll opp listen
+   /*
+    * Løp gjennom resultatene og fyll opp listview
+    */
    for ( i = 0; i < res.rows.length; i++) {
       rec = res.rows.item(i);
-      selId.append($("<li/>").append($("<a/>", {
+      $(selId).append($("<li/>").append($("<a/>", {
          "href" : "#",
          "text" : rec.navn
       })));
    };
 }
 
-//  ********************************************
-//  Initier Liste
-//  ********************************************
+//  =================
+//  = Initier Liste =
+//  =================
 function initierListe(tx, tbl, selId, fOppdater) {
-   console.log("initierListe: " + tbl);
+   console.log("initierListe: " + selId);
    tx.executeSql('select id, navn from ' + tbl + " order by navn", [], function(tx, res) {
       fOppdater(tx, res, selId);
    }, DbErrorHandler);
 }
 
-//  ********************************************
-//  Initier DropDown
-//  ********************************************
+//  ====================
+//  = Initier DropDown =
+//  ====================
 function initierDropDown(tbl, selId) {
    // Fyll inn dropdown
    db.transaction(function(tx) {
@@ -118,9 +139,9 @@ function initierDropDown(tbl, selId) {
    }, DbErrorHandler);
 }
 
-//  ********************************************
-//  Initier ListView
-//  ********************************************
+//  ====================
+//  = Initier ListView =
+//  ====================
 function initierListView(tbl, selId) {
    // Fyll inn listView
    db.transaction(function(tx) {
@@ -128,20 +149,20 @@ function initierListView(tbl, selId) {
    }, DbErrorHandler);
 }
 
-//  ********************************************
-//  Initier Objects (dropdowns, listview, etc.)
-//  ********************************************
+//  ===============================================
+//  = Initier Objects (dropdowns, listview, etc.) =
+//  ===============================================
 function initierDropDowns() {
    console.log("initierDropDowns");
    // Fyll inn dropdown for våpen
-   initierDropDown("vaapen", $("#selectVaapen"));
-   initierListView("vaapen", $("#vaapenList"));
+   initierDropDown("vaapen", "#selectVaapen");
+   initierListView("vaapen", "#vaapenList");
 
 }
 
-//  ********************************************
-//  Populate the database
-//  ********************************************
+//  =========================
+//  = Populate the database =
+//  =========================
 function initierDatabase(tx) {
    console.log("initierDatabase");
    // dropAllTables(tx);
@@ -149,94 +170,162 @@ function initierDatabase(tx) {
    initierTabellKule(tx);
    initierTabellVaapen(tx);
    initierTabellcurrentRecord(tx);
-   getCurrentRecord(tx);
+   /*
+   * For some reasons a new transaction must be made
+   * to be able to get current record without fail
+   */
+   //db.transaction(function(tx) {
+   //   getCurrentRecord(tx);
+   // });
+
 }
 
 $(function() {
-   //  ********************************************
-   //  hovedside event handlers
-   //  ********************************************
+
+   //  ============================
+   //  = HOVEDSIDE EVENT HANDLERS =
+   //  ============================
    $('#hovedside').on('pagebeforeshow', function() {
-      log("hovedside: pagebeforeshow");
+      console.log("hovedside: pagebeforeshow");
    });
+
+   //  ============
+   //  = pageshow =
+   //  ============
    $('#hovedside').on('pageshow', function() {
-      log("hovedside: pageshow");
+      console.log("hovedside: pageshow");
+      /*
+      * Find id of vaapenName in current record
+      */
+      // vaapenSelectedId = getIdOfCurrentRecord("#selectVaapen option");
+      /*
+       * set the current vaapen as selected in the dropdown
+       */
       $("#selectVaapen").prop('selectedIndex', vaapenSelectedId).selectmenu('refresh');
    });
+
+   //  ==================
+   //  = pagebeforehide =
+   //  ==================
    $('#hovedside').on('pagebeforehide', function() {
-      log("hovedside: pagebeforehide");
+      /*
+       * find the id of the selected element in the dropdown
+       */
       vaapenSelectedId = $("#selectVaapen option:selected").closest("option").index();
    });
-   //  ********************************************
-   //  vaapenOppsett event handlers
-   //  ********************************************
 
-   // #############  vaapenOppsett.pagebeforeshow ##################
+   //  ================================
+   //  = VAAPENOPPSETT EVENT HANDLERS =
+   //  ================================
+
+   //  ==================
+   //  = pagebeforeshow =
+   //  ==================
    $('#vaapenOppsett').on('pagebeforeshow', function() {
-      console.log("vaapenOppsett: pagebeforeshow");
+      /*
+       * load dropdown first time page is show
+       */
       if (!isVaapenOppsettLoaded) {
          initierDropDown("kule", $("#selectKule"));
          isVaapenOppsettLoaded = true;
       }
    });
 
-   // #############  vaapenOppsett.pageshow ##################
+   //  ============
+   //  = pageshow =
+   //  ============
    $('#vaapenOppsett').on('pageshow', function() {
-      log("vaapenOppsett.pageshow");
+      console.log("vaapenOppsett.pageshow");
       vo_setActiveElement("#vaapenList li a:eq(" + vaapenSelectedId + ")");
       $("#vaapenList").scrollTop($("#vaapenList li:eq(" + vaapenSelectedId + ")").position().top - $("#vaapenList li:eq(0)").position().top);
    });
 
-   // #############  vaapenOppsett.pagebeforehide ##################
+   //  ==================
+   //  = pagebeforehide =
+   //  ==================
    $('#vaapenOppsett').on('pagebeforehide', function() {
-      log("vaapenOppsett: pagebeforehide");
+      console.log("vaapenOppsett: pagebeforehide");
    });
 
-   // #############  selectVaapen.taphold ##################
-   $("#selectVaapen-button").bind('taphold', function(event) {
-      log("tapholdHandler");
-      $.mobile.changePage("#vaapenOppsett", {
-         transition : "none"
-      });
-   });
+   //  ===========
+   //  = taphold =
+   //  ===========
+   // $("#selectVaapen-button").bind('taphold', function(event) {
+      // console.log("tapholdHandler");
+      // $.mobile.changePage("#vaapenOppsett", {
+         // transition : "none"
+      // });
+   // });
 
-   // #############  vaapenList.click ##################
+   //  =========
+   //  = click =
+   //  =========
    $(document).on('click', "#vaapenList li a", function() {
-      log("#vaapenList li a : click event");
-      //      vo_setActiveElement("#vaapenList li a", this);
+      console.log("#vaapenList li a : click event");
       vo_setActiveElement(this);
+
+      // find the id of the element in the listview
       vaapenSelectedId = $(this).closest("li").index();
    });
-   //  ********************************************
-   //  vaapenEdit event handlers
-   //  ********************************************
+
+   //  =============================
+   //  = VAAPENEDIT EVENT HANDLERS =
+   //  =============================
+
+   //  ==================
+   //  = pagebeforeshow =
+   //  ==================
    $('#vaapenEdit').on('pagebeforeshow', function() {
-      log("vaapenEdit: pagebeforeshow");
+      console.log("vaapenEdit: pagebeforeshow");
    });
+
+   //  ==================
+   //  = pagebeforehide =
+   //  ==================
    $('#vaapenEdit').on('pagebeforehide', function() {
-      log("vaapenEdit: pagebeforehide");
+      console.log("vaapenEdit: pagebeforehide");
    });
-   // //  Tap and Hold
-   // $("#vaapenList").bind('taphold', function(event) {
-   // console.log("tapholdHandler");
-   // $.mobile.changePage("#vaapenEdit", {
-   // transition : "slide"
-   // });
-   // });
+
+   //  ===========
+   //  = taphold =
+   //  ===========
+//   $("#vaapenList").bind('taphold', function(event) {
+//      console.log("tapholdHandler");
+//      $.mobile.changePage("#vaapenEdit", {
+//         transition : "slide"
+//      });
+//   });
 });
 
 // ###########################################################################
 //                                  VAAPENOPPSETT FUNCTIONS
 // ###########################################################################
 
-// ***************************************
+// ============================
 // Set Active element in list
-// ***************************************
+// ============================
 //function vo_setActiveElement(lv, elem) {
 function vo_setActiveElement(elem) {
-   log("vo_setActiveElement called");
+   console.log("vo_setActiveElement called");
    $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
    $(elem).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+}
+
+//  =============================================
+//  = Get id of vaapenName in a select/listview
+//  =============================================
+function getIdOfCurrentRecord(list) {
+   var ant = 0;
+   console.log("Searching:" + currentRecord.vaapenName + ":");
+   console.log("antall elementer: " + $(list).length);
+   $(list).each(function() {
+      console.log(ant + ": " + $(this).val() + ":" + $(this).text() + ":");
+      if (currentRecord.vaapenName == $(this).text())
+         return false;
+      ++ant;
+   });
+   console.log(ant + " found");
+   return ($(list).length == ant) ? 0 : ant;
 }
 
 //  ********************************************
@@ -246,7 +335,7 @@ function sjekkBasic() {
    console.log("sjekkBasic");
    //get
    var bla = $('#basic').val();
-   log("Value entered: " + bla);
+   console.log("Value entered: " + bla);
    //set
    $('#basic').val('Skriv inn ny tekst');
 }

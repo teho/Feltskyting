@@ -8,7 +8,7 @@
 //  Opprett og initier tabell Sikter
 //  ********************************************
 function initierTabellSikte(tx) {
-   log("initierTabellSikte");
+   console.log("initierTabellSikte");
    try {
       tableExists(tx, "sikte", function() {
          tx.executeSql('create table if not exists sikte (id unique, navn, gjenge, antKnepp)');
@@ -26,7 +26,7 @@ function initierTabellSikte(tx) {
 //  Opprett og initier tabell Kuler
 //  ********************************************
 function initierTabellKule(tx) {
-   log("initierTabellKule");
+   console.log("initierTabellKule");
    try {
       tableExists(tx, "kule", function() {
          tx.executeSql('create table if not exists kule (id unique, navn, balC)');
@@ -46,7 +46,7 @@ function initierTabellKule(tx) {
 //  Opprett og initier tabell Vaapen
 //  ********************************************
 function initierTabellVaapen(tx) {
-   log("initierTabellVaapen");
+   console.log("initierTabellVaapen");
    try {
       tableExists(tx, "vaapen", function() {
          tx.executeSql('create table if not exists vaapen (id unique, navn, kuleId, sikteId)');
@@ -71,12 +71,15 @@ function initierTabellVaapen(tx) {
 // Init last table for last used data
 // **********************************************
 function initierTabellcurrentRecord(tx) {
-   log("initierTabellcurrentRecord");
+   console.log("initierTabellcurrentRecord");
+   // tx.executeSql('drop table if exists currentRecord');
    try {
       tableExists(tx, "currentRecord", function() {
+         console.log("Oppretter ny currentRecord");
          tx.executeSql('create table currentRecord (vaapenId, vaapenName)');
          tx.executeSql('insert into currentRecord (vaapenId, vaapenName) values (1, "FeltSauer")');
       }, function() {
+         console.log("currentRecord already exists");
          return;
       });
    } catch (err) {
@@ -102,25 +105,33 @@ function dropAllTables(tx) {
 // **********************************************
 // Get current record
 // **********************************************
-function getCurrentRecord(tx) {
+function getCurrentRecord() {
    try {
-      tx.executeSql('select * from currentRecord;', undefined, function(tx, res) {
-         currentRecord.vaapenId = res.rows.item(0).vaapenId;
-         currentRecord.vaapenName = res.rows.item(0).vaapenName;
-         log(currentRecord.vaapenId);
-         log(currentRecord.vaapenName);
+      db.transaction(function(tx) {
+         console.log("getCurrentRecord");
+         tx.executeSql('select * from currentRecord', undefined, function(tx, res) {
+            currentRecord.vaapenId = res.rows.item(0).vaapenId;
+            currentRecord.vaapenName = res.rows.item(0).vaapenName;
+            console.log(currentRecord.vaapenId);
+            console.log(currentRecord.vaapenName);
+         });
       });
    } catch(err) {
       alert("getCurrentRecord: " + err.message);
    }
 }
+
 // **********************************************
 // Update current record
 // **********************************************
-function updateCurrentrecord() {
+function updateCurrentRecord() {
    try {
-      tx.executeSql('delete from currentRecord;');
-      tx.executeSql('insert into currentRecord (vaapenId, vaapenName) values (?, ?);', currentRecord.vaapenId, currentRecord.vaapenName);
+      db.transaction(function(tx) {
+         console.log("updateCurrentRecord");
+         tx.executeSql('delete from currentRecord');
+         tx.executeSql('insert into currentRecord (vaapenId, vaapenName) values (?, ?);', [currentRecord.vaapenId, currentRecord.vaapenName], undefined, DbErrorHandler);
+         console.log("updateCurrentRecord stored");
+      });
    } catch(err) {
       alert("updateCurrentRecord: " + err.message);
    }
