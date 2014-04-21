@@ -1,14 +1,17 @@
-
 .main-page {
-    width: 90%;
-    margin: 0 auto;
+   width: 90%;
+   margin: 0 auto;
 }
 
-#selectVaapen-button, #selectKule-button {
-    width: auto;
-    font-size: 1.2em;
-    margin: 0px;
-    padding: 3px 0px 3px 0px;
+#selectVaapen-button, #selectKule-button, #selectSikte-button {
+   width: auto;
+   font-size: 1.2em;
+   margin: 0px;
+   padding: 3px 0px 3px 0px;
+}
+#selectKule-button, #selectSikte-button {
+   width: 80%;
+   margin: 15px auto;
 }
 
 #kuleinfo {
@@ -27,45 +30,49 @@
 }
 
 #vaapenList li a {
-    font-size: 1.2em;
-    padding: 4px 15px;
-    margin: 1px 0;
-    border: none;
+   font-size: 1.2em;
+   padding: 4px 15px;
+   margin: 1px 0;
+   border: none;
 }
 
 .vaapenListSelected {
    background-color: red !important;
 }
 #overskrift {
-    font-size: 210%;
-    border-bottom: 1px solid #BBBBBB;
-    font-variant: small-caps;
+   font-size: 210%;
+   border-bottom: 1px solid #BBBBBB;
+   font-variant: small-caps;
 }
 
 #overskrift h1 {
-    margin: 0;
+   margin: 0;
    padding: 0;
 }
 
 #footer h1 {
    font-size: 0.6em;
-    padding: 2px 0px 0px 0px;
+   padding: 2px 0px 0px 0px;
 }
 
 #selectKule {
-    margin: 20px auto;
-    padding: 0px;
-    width: 100%;
+   margin: 20px auto;
+   padding: 0px;
+   width: 100%;
 }
 
 .tabell {
-    height: auto;
-    overflow: auto;
+   height: auto;
+   overflow: auto;
 }
 
 .tabell ul li {
    border: none !important;
    font-size: 1.0em;
    padding: 1px 20px !important;
-   
+}
+
+.ui-icon-feltskyting:after {
+   background-image: url("../themes/images/icons-png/feltskyting.png");
+   background-color: transparent !important;
 }

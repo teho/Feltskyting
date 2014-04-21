@@ -4,13 +4,14 @@
       <title>Feltskyting</title>
       <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-      <!-- link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" /  -->
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 
-<link rel="stylesheet" href="themes/terje-a.min.css" />
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-      
+      <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="themes/terje-a.min.css" />
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile.structure-1.4.2.min.css" />
+      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
       <link rel="stylesheet" type="text/css" href="css/feltskyting.css" />
 
       <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -27,9 +28,7 @@
             <h1>Feltskyting</h1>
          </div>
          <div role="main" data-role="ui-content" class="main-page">
-            <select id="selectVaapen" data-native-menu="false" data-icon="false">
-               <!-- Empty -->
-            </select>
+            <select id="selectVaapen" data-native-menu="false" data-icon="feltskyting"></select>
             <div id="result"></div>
             <div id="kuleinfo">
                Sierra 144gr 6.5mm, 812 m/s
@@ -92,9 +91,9 @@
             <h1>Våpenoppsett</h1>
          </div>
          <div role="main" date-role="ui-content" class="main-page">
-            <ul data-role="listview" data-scroll="true" id="vaapenList" data-icon="false">
-            </ul>
-            <select id="selectKule" data-native-menu="false" data-icon="false"></select>
+            <ul data-role="listview" data-scroll="true" id="vaapenList" data-icon="feltskyting"></ul>
+            <select id="selectKule" data-native-menu="false" data-icon="feltskyting"></select>
+            <select id="selectSikte" data-native-menu="false" data-icon="feltskyting"></select>
 
             <label for="basic">Text Input:</label>
             <input type="text" name="name" id="basic" value="" />
@@ -117,7 +116,7 @@
          </div>
          <div role="main" data-role="ui-content">
             <div data-scroll="true" style="width: 80%; max-width: 340px; margin: auto auto 80px auto;">
-               <ul data-role="listview" data-corners="false">
+               <ul data-role="listview" data-icon="feltskyting">
                   <li> Linje1 </li>
                   <li> Linje2 </li>
                   <li> Linje3 </li>

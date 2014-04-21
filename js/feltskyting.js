@@ -79,8 +79,8 @@ function onPause() {
 //  = Parameter endret =
 //  ====================
 // function parameterEndring(obj) {
-   // console.log("parameterEndring");
-   // console.log(obj.options[obj.selectedIndex].innerHTML);
+// console.log("parameterEndring");
+// console.log(obj.options[obj.selectedIndex].innerHTML);
 // }
 
 //  ======================================
@@ -165,11 +165,11 @@ function initierDropDowns() {
 //  =========================
 function initierDatabase(tx) {
    console.log("initierDatabase");
-   // dropAllTables(tx);
+   dropAllTables(tx);
    initierTabellSikte(tx);
    initierTabellKule(tx);
    initierTabellVaapen(tx);
-   initierTabellcurrentRecord(tx);
+   // initierTabellcurrentRecord(tx);
    /*
    * For some reasons a new transaction must be made
    * to be able to get current record without fail
@@ -214,6 +214,13 @@ $(function() {
       vaapenSelectedId = $("#selectVaapen option:selected").closest("option").index();
    });
 
+   //  =========
+   //  = click =
+   //  =========
+   /*   $('#hovedside').on('click', function() {
+   console.log($(".main-page").html());
+   });
+   */
    //  ================================
    //  = VAAPENOPPSETT EVENT HANDLERS =
    //  ================================
@@ -227,6 +234,7 @@ $(function() {
        */
       if (!isVaapenOppsettLoaded) {
          initierDropDown("kule", $("#selectKule"));
+         initierDropDown("sikte", $("#selectSikte"));
          isVaapenOppsettLoaded = true;
       }
    });
@@ -251,10 +259,10 @@ $(function() {
    //  = taphold =
    //  ===========
    // $("#selectVaapen-button").bind('taphold', function(event) {
-      // console.log("tapholdHandler");
-      // $.mobile.changePage("#vaapenOppsett", {
-         // transition : "none"
-      // });
+   // console.log("tapholdHandler");
+   // $.mobile.changePage("#vaapenOppsett", {
+   // transition : "none"
+   // });
    // });
 
    //  =========
@@ -289,12 +297,12 @@ $(function() {
    //  ===========
    //  = taphold =
    //  ===========
-//   $("#vaapenList").bind('taphold', function(event) {
-//      console.log("tapholdHandler");
-//      $.mobile.changePage("#vaapenEdit", {
-//         transition : "slide"
-//      });
-//   });
+   //   $("#vaapenList").bind('taphold', function(event) {
+   //      console.log("tapholdHandler");
+   //      $.mobile.changePage("#vaapenEdit", {
+   //         transition : "slide"
+   //      });
+   //   });
 });
 
 // ###########################################################################
@@ -307,8 +315,8 @@ $(function() {
 //function vo_setActiveElement(lv, elem) {
 function vo_setActiveElement(elem) {
    console.log("vo_setActiveElement called");
-   $("#vaapenList li a").removeClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
-   $(elem).addClass('ui-btn-icon-right ui-icon-check vaapenListSelected');
+   $("#vaapenList li a").removeClass('ui-btn-icon-right vaapenListSelected');
+   $(elem).addClass('ui-btn-icon-right vaapenListSelected');
 }
 
 //  =============================================
