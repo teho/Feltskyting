@@ -284,7 +284,7 @@ $(function() {
    //  =========
    //  = click =
    //  =========
-   $(document).on('click', "#vaapenList li a", function() {
+   $('#vaapenList li a').on('click', function() {
       console.log("#vaapenList li a : click event");
       vo_setActiveElement(this);
       /*

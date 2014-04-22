@@ -76,3 +76,40 @@
    background-image: url("../themes/images/icons-png/feltskyting.png");
    background-color: transparent !important;
 }
+
+#inputLine {
+   font-size: 1.2em;
+   width: 80%;
+   height: 30px;
+   background-color: yellow;
+   margin: 0px auto;
+   position: absolute;
+   clear: both;
+}
+#inputLine label {
+   font-size: 1.2em;
+   background-color: orange;
+   width: 45%;
+   float: left;
+}
+#inputLine input {
+   font-size: 1.2em;
+   width: 30px;
+   height: 30px;
+   position: absolute;
+   left: 0px;
+   padding: 0px;
+   margin: 0px;
+   background-color: #6FACD5;
+   text-align: right;
+}
+#inputLine span {
+   width: 30px;
+   height: 30px;
+   padding: 0px;
+   margin: 0px;
+   position: absolute;
+   right: 30px;
+   background-color: #6FACD5;
+   text-align: right;
+}
