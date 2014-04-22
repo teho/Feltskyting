@@ -79,10 +79,11 @@ function onPause() {
 //  = Parameter endret =
 //  ====================
 function parameterEndring(obj) {
-   vaapenSelectedId = $(obj).prop('selectedIndex');                         // Selected index!!!!!
-console.log(vaapenSelectedId);  
-console.log("parameterEndring: " + $(obj).val(3).text(3) );
-console.log(obj.options[obj.selectedIndex].innerHTML);
+   vaapenSelectedId = $(obj).prop('selectedIndex');
+   // Selected index!!!!!
+   console.log(vaapenSelectedId);
+   console.log("parameterEndring: " + $(obj).val(3).text(3));
+   console.log(obj.options[obj.selectedIndex].innerHTML);
 }
 
 //  ======================================
@@ -220,16 +221,15 @@ $(function() {
       vaapenSelectedId = $("#selectVaapen option:selected").closest("option").index();
    });
 
-//  ========== 
-//  = change = 
-//  ========== 
-$("#selectVaapen").on('change', function() {
-   console.log("hovedside: change");
-    console.log($("#selectVaapen option:selected").closest("option").index());
-    console.log($(this).val());
-    console.log($("#selectVaapen option:selected").text());
-    console.log($(this).val().text());
-});
+   //  ==========
+   //  = change =
+   //  ==========
+   $("#selectVaapen").on('change', function() {
+      console.log("hovedside: change");
+      console.log($("#selectVaapen option:selected").closest("option").index());
+      console.log($(this).val());
+      console.log($("#selectVaapen option:selected").text());
+   });
    //  =========
    //  = click =
    //  =========
