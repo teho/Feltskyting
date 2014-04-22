@@ -78,10 +78,12 @@ function onPause() {
 //  ====================
 //  = Parameter endret =
 //  ====================
-// function parameterEndring(obj) {
-// console.log("parameterEndring");
-// console.log(obj.options[obj.selectedIndex].innerHTML);
-// }
+function parameterEndring(obj) {
+   vaapenSelectedId = $(obj).prop('selectedIndex');                         // Selected index!!!!!
+console.log(vaapenSelectedId);  
+console.log("parameterEndring: " + $(obj).val(3).text(3) );
+console.log(obj.options[obj.selectedIndex].innerHTML);
+}
 
 //  ======================================
 //  = Oppdater Dropdown fra resultatsett =
@@ -180,6 +182,10 @@ function initierDatabase(tx) {
 
 }
 
+//  =======================================================
+//  = EVENT HANDLERS =
+//  =======================================================
+
 $(function() {
 
    //  ============================
@@ -214,6 +220,16 @@ $(function() {
       vaapenSelectedId = $("#selectVaapen option:selected").closest("option").index();
    });
 
+//  ========== 
+//  = change = 
+//  ========== 
+$("#selectVaapen").on('change', function() {
+   console.log("hovedside: change");
+    console.log($("#selectVaapen option:selected").closest("option").index());
+    console.log($(this).val());
+    console.log($("#selectVaapen option:selected").text());
+    console.log($(this).val().text());
+});
    //  =========
    //  = click =
    //  =========
@@ -271,8 +287,9 @@ $(function() {
    $(document).on('click', "#vaapenList li a", function() {
       console.log("#vaapenList li a : click event");
       vo_setActiveElement(this);
-
-      // find the id of the element in the listview
+      /*
+       *  find the id of the element in the listview
+       */
       vaapenSelectedId = $(this).closest("li").index();
    });
 
